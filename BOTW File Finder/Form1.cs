@@ -53,16 +53,18 @@ namespace BOTW_File_Finder {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+            Text = "BOTW Modding Helper v" + Application.ProductVersion;
             // read file into a string and deserialize JSON to a type
             botwItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "botw_names.json")));
             baseGame = GetDirectory("baseGame.dir");
             FolderSelectDialog dialog = new FolderSelectDialog();
-            if (string.IsNullOrEmpty(baseGame) || !Directory.Exists(Path.Combine(baseGame, @"content\Model"))) {
+            string baseGameModelDir = Path.Combine(baseGame, @"content\Model");
+            if (string.IsNullOrEmpty(baseGame) || !Directory.Exists(baseGameModelDir)) {
                 while (true) {
                     if (MessageBox.Show("Please assign the base game folder for your BoTW dump", "BoTW File Finder") == DialogResult.OK) {
                         if (dialog.ShowDialog() == DialogResult.OK) {
                             baseGame = dialog.SelectedPath;
-                            if (Directory.Exists(Path.Combine(baseGame, @"content\Model"))) {
+                            if (Directory.Exists(baseGameModelDir)) {
                                 SaveDirectory("baseGame.dir", baseGame);
                                 break;
                             } else {
@@ -82,12 +84,13 @@ namespace BOTW_File_Finder {
             }
             if (!forceExit) {
                 update = GetDirectory("update.dir");
-                if (string.IsNullOrEmpty(update) || !Directory.Exists(Path.Combine(update, @"content\Model"))) {
+                string updateModelDir = Path.Combine(update, @"content\Model");
+                if (string.IsNullOrEmpty(update) || !Directory.Exists(updateModelDir)) {
                     while (true) {
                         if (MessageBox.Show("Please assign the update folder for your BoTW dump", "BoTW File Finder") == DialogResult.OK) {
                             if (dialog.ShowDialog() == DialogResult.OK) {
                                 update = dialog.SelectedPath;
-                                if (Directory.Exists(Path.Combine(update, @"content\Model"))) {
+                                if (Directory.Exists(updateModelDir)) {
                                     SaveDirectory("update.dir", update);
                                     break;
                                 } else {
