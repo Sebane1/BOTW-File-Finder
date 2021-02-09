@@ -53,7 +53,7 @@ namespace BOTW_File_Finder {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            Text = "BOTW Modding Helper v" + Application.ProductVersion;
+            Text = "BOTW Filer Finder v" + Application.ProductVersion;
             // read file into a string and deserialize JSON to a type
             botwItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "botw_names.json")));
             baseGame = GetDirectory("baseGame.dir");
