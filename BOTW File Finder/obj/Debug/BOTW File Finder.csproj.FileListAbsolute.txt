@@ -1,0 +1,13 @@
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Debug\BOTW File Finder.exe.config
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Debug\BOTW File Finder.exe
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Debug\BOTW File Finder.pdb
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Debug\Newtonsoft.Json.dll
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Debug\Newtonsoft.Json.xml
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Debug\BOTW File Finder.csprojAssemblyReference.cache
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Debug\BOTW_File_Finder.Form1.resources
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Debug\BOTW_File_Finder.Properties.Resources.resources
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Debug\BOTW File Finder.csproj.GenerateResource.cache
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Debug\BOTW File Finder.csproj.CoreCompileInputs.cache
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Debug\BOTW File Finder.csproj.CopyComplete
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Debug\BOTW File Finder.exe
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Debug\BOTW File Finder.pdb
