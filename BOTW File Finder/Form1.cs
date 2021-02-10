@@ -159,5 +159,9 @@ namespace BOTW_File_Finder {
         private void contextMenuStrip_Opening(object sender, CancelEventArgs e) {
 
         }
+
+        private void objectNameView_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
     }
 }
