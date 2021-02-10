@@ -25,6 +25,8 @@ namespace BOTW_File_Finder {
         private string toolbox = @"M:\Toolbox-Latest\toolbox.exe";
         private FileInfo[] currentFiles;
         private bool forceExit;
+        private string currentCopyText;
+        private string currentPathText;
 
         private void label1_Click(object sender, EventArgs e) {
 
@@ -118,9 +120,13 @@ namespace BOTW_File_Finder {
         }
 
         private void itemView_SelectedValueChanged(object sender, EventArgs e) {
+            currentPathText = "";
+            fullPathText.Text = currentPathText;
             objectNameView.Items.Clear();
             fileNameView.Items.Clear();
             objectNameView.Items.AddRange(itemFileAssociations[itemView.SelectedItem as string].ToArray());
+            currentCopyText = itemView.SelectedItem.ToString();
+            copyBox.Text = currentCopyText;
         }
         private string GetDirectory(string name) {
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, name);
@@ -137,10 +143,14 @@ namespace BOTW_File_Finder {
             }
         }
         private void objectNameView_SelectedValueChanged(object sender, EventArgs e) {
+            currentPathText = "";
+            fullPathText.Text = currentPathText;
             fileNameView.Items.Clear();
             files = new List<string>();
             files.AddRange(Directory.EnumerateFiles(Path.Combine(baseGame, @"content\Model")));
             files.AddRange(Directory.EnumerateFiles(Path.Combine(update, @"content\Model")));
+            currentCopyText = objectNameView.SelectedItem.ToString();
+            copyBox.Text = currentCopyText;
             //files.AddRange(Directory.EnumerateFiles(Path.Combine(dlc, @"content\Model")));
             if (objectNameView.SelectedItem != null) {
                 currentFiles = files.Select(x => new FileInfo(x))
@@ -162,6 +172,37 @@ namespace BOTW_File_Finder {
 
         private void objectNameView_SelectedIndexChanged(object sender, EventArgs e) {
 
+        }
+
+        private void fileNameView_SelectedValueChanged(object sender, EventArgs e) {
+            currentCopyText = fileNameView.SelectedItem.ToString();
+            currentPathText = currentFiles[fileNameView.SelectedIndex].FullName;
+            fullPathText.Text = currentPathText;
+            copyBox.Text = currentCopyText;
+        }
+
+        private void copyBox_TextChanged(object sender, EventArgs e) {
+            copyBox.Text = currentCopyText;
+        }
+
+        private void copyBox_KeyDown(object sender, KeyEventArgs e) {
+            copyBox.Text = currentCopyText;
+        }
+
+        private void copyBox_KeyPress(object sender, KeyPressEventArgs e) {
+            copyBox.Text = currentCopyText;
+        }
+
+        private void copyBox_KeyUp(object sender, KeyEventArgs e) {
+             copyBox.Text = currentCopyText;
+        }
+
+        private void label2_Click(object sender, EventArgs e) {
+
+        }
+
+        private void fullPathText_TextChanged(object sender, EventArgs e) {
+            fullPathText.Text = currentPathText;
         }
     }
 }

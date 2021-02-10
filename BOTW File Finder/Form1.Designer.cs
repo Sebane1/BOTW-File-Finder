@@ -31,6 +31,10 @@
             this.fileNameView = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.copyBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.fullPathText = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -49,7 +53,7 @@
             this.searchBar.ForeColor = System.Drawing.SystemColors.Window;
             this.searchBar.Location = new System.Drawing.Point(53, 6);
             this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(454, 20);
+            this.searchBar.Size = new System.Drawing.Size(279, 20);
             this.searchBar.TabIndex = 0;
             this.searchBar.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -73,7 +77,7 @@
             this.itemView.FormattingEnabled = true;
             this.itemView.Location = new System.Drawing.Point(0, 0);
             this.itemView.Name = "itemView";
-            this.itemView.Size = new System.Drawing.Size(150, 180);
+            this.itemView.Size = new System.Drawing.Size(208, 200);
             this.itemView.TabIndex = 2;
             this.itemView.SelectedValueChanged += new System.EventHandler(this.itemView_SelectedValueChanged);
             // 
@@ -85,7 +89,7 @@
             this.objectNameView.FormattingEnabled = true;
             this.objectNameView.Location = new System.Drawing.Point(0, 0);
             this.objectNameView.Name = "objectNameView";
-            this.objectNameView.Size = new System.Drawing.Size(166, 180);
+            this.objectNameView.Size = new System.Drawing.Size(209, 200);
             this.objectNameView.TabIndex = 3;
             this.objectNameView.SelectedIndexChanged += new System.EventHandler(this.objectNameView_SelectedIndexChanged);
             this.objectNameView.SelectedValueChanged += new System.EventHandler(this.objectNameView_SelectedValueChanged);
@@ -98,8 +102,9 @@
             this.fileNameView.FormattingEnabled = true;
             this.fileNameView.Location = new System.Drawing.Point(0, 0);
             this.fileNameView.Name = "fileNameView";
-            this.fileNameView.Size = new System.Drawing.Size(176, 180);
+            this.fileNameView.Size = new System.Drawing.Size(190, 200);
             this.fileNameView.TabIndex = 4;
+            this.fileNameView.SelectedValueChanged += new System.EventHandler(this.fileNameView_SelectedValueChanged);
             this.fileNameView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.fileNameView_MouseDoubleClick);
             // 
             // splitContainer1
@@ -108,7 +113,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.BackColor = System.Drawing.Color.Black;
-            this.splitContainer1.Location = new System.Drawing.Point(7, 32);
+            this.splitContainer1.Location = new System.Drawing.Point(7, 60);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -119,8 +124,8 @@
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Black;
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(500, 180);
-            this.splitContainer1.SplitterDistance = 150;
+            this.splitContainer1.Size = new System.Drawing.Size(615, 200);
+            this.splitContainer1.SplitterDistance = 208;
             this.splitContainer1.TabIndex = 5;
             // 
             // splitContainer2
@@ -136,15 +141,70 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.fileNameView);
-            this.splitContainer2.Size = new System.Drawing.Size(346, 180);
-            this.splitContainer2.SplitterDistance = 166;
+            this.splitContainer2.Size = new System.Drawing.Size(403, 200);
+            this.splitContainer2.SplitterDistance = 209;
             this.splitContainer2.TabIndex = 5;
+            // 
+            // copyBox
+            // 
+            this.copyBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.copyBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.copyBox.ForeColor = System.Drawing.Color.Gold;
+            this.copyBox.Location = new System.Drawing.Point(396, 6);
+            this.copyBox.Name = "copyBox";
+            this.copyBox.Size = new System.Drawing.Size(226, 20);
+            this.copyBox.TabIndex = 6;
+            this.copyBox.TextChanged += new System.EventHandler(this.copyBox_TextChanged);
+            this.copyBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.copyBox_KeyDown);
+            this.copyBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.copyBox_KeyPress);
+            this.copyBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.copyBox_KeyUp);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.ForeColor = System.Drawing.SystemColors.Control;
+            this.label1.Location = new System.Drawing.Point(339, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Selection";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // fullPathText
+            // 
+            this.fullPathText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.fullPathText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.fullPathText.ForeColor = System.Drawing.Color.Gold;
+            this.fullPathText.Location = new System.Drawing.Point(53, 32);
+            this.fullPathText.Name = "fullPathText";
+            this.fullPathText.Size = new System.Drawing.Size(569, 20);
+            this.fullPathText.TabIndex = 8;
+            this.fullPathText.TextChanged += new System.EventHandler(this.fullPathText_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.ForeColor = System.Drawing.SystemColors.Control;
+            this.label2.Location = new System.Drawing.Point(18, 35);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Path";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(515, 216);
+            this.ClientSize = new System.Drawing.Size(630, 265);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.fullPathText);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.copyBox);
             this.Controls.Add(this.searchBarLLabel);
             this.Controls.Add(this.searchBar);
             this.Controls.Add(this.splitContainer1);
@@ -174,6 +234,10 @@
         private System.Windows.Forms.ListBox fileNameView;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.TextBox copyBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox fullPathText;
+        private System.Windows.Forms.Label label2;
     }
 }
 
