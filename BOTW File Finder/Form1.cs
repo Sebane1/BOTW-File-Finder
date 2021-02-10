@@ -27,6 +27,8 @@ namespace BOTW_File_Finder {
         private bool forceExit;
         private string currentCopyText;
         private string currentPathText;
+        private bool canDoDragDrop;
+        private Point startPos;
 
         private void label1_Click(object sender, EventArgs e) {
 
@@ -149,7 +151,9 @@ namespace BOTW_File_Finder {
             files = new List<string>();
             files.AddRange(Directory.EnumerateFiles(Path.Combine(baseGame, @"content\Model")));
             files.AddRange(Directory.EnumerateFiles(Path.Combine(update, @"content\Model")));
-            currentCopyText = objectNameView.SelectedItem.ToString();
+            if (objectNameView.SelectedItem != null) {
+                currentCopyText = objectNameView.SelectedItem.ToString();
+            }
             copyBox.Text = currentCopyText;
             //files.AddRange(Directory.EnumerateFiles(Path.Combine(dlc, @"content\Model")));
             if (objectNameView.SelectedItem != null) {
@@ -163,7 +167,9 @@ namespace BOTW_File_Finder {
         }
 
         private void fileNameView_MouseDoubleClick(object sender, MouseEventArgs e) {
-            Process.Start(currentFiles[fileNameView.SelectedIndex].FullName);
+            if (fileNameView.SelectedItem != null) {
+                Process.Start(currentFiles[fileNameView.SelectedIndex].FullName);
+            }
         }
 
         private void contextMenuStrip_Opening(object sender, CancelEventArgs e) {
@@ -175,8 +181,10 @@ namespace BOTW_File_Finder {
         }
 
         private void fileNameView_SelectedValueChanged(object sender, EventArgs e) {
-            currentCopyText = fileNameView.SelectedItem.ToString();
-            currentPathText = currentFiles[fileNameView.SelectedIndex].FullName;
+            if (fileNameView.SelectedItem != null) {
+                currentCopyText = fileNameView.SelectedItem.ToString();
+                currentPathText = currentFiles[fileNameView.SelectedIndex].FullName;
+            }
             fullPathText.Text = currentPathText;
             copyBox.Text = currentCopyText;
         }
@@ -194,7 +202,7 @@ namespace BOTW_File_Finder {
         }
 
         private void copyBox_KeyUp(object sender, KeyEventArgs e) {
-             copyBox.Text = currentCopyText;
+            copyBox.Text = currentCopyText;
         }
 
         private void label2_Click(object sender, EventArgs e) {
@@ -203,6 +211,39 @@ namespace BOTW_File_Finder {
 
         private void fullPathText_TextChanged(object sender, EventArgs e) {
             fullPathText.Text = currentPathText;
+        }
+
+        private void fileNameView_MouseDown(object sender, MouseEventArgs e) {
+            startPos = e.Location;
+            canDoDragDrop = true;
+        }
+
+        private void fileNameView_MouseMove(object sender, MouseEventArgs e) {
+            if ((e.X != startPos.X || startPos.Y != e.Y) && canDoDragDrop) {
+                List<string> fileList = new List<string>();
+                foreach (int item in fileNameView.SelectedIndices) {
+                    fileList.Add(currentFiles[item].FullName);
+                }
+                if (fileList.Count > 0) {
+                    DataObject fileDragData = new DataObject(DataFormats.FileDrop, fileList.ToArray());
+                    DoDragDrop(fileDragData, DragDropEffects.Copy);
+                }
+                canDoDragDrop = false;
+            }
+        }
+
+        private void fileNameView_MouseUp(object sender, MouseEventArgs e) {
+            canDoDragDrop = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            if (fileNameView.SelectedItem != null) {
+                string args = "";
+                foreach (int item in fileNameView.SelectedIndices) {
+                    args += @"""" + currentFiles[item].FullName + @"""";
+                }
+                Process.Start(toolbox, args);
+            }
         }
     }
 }

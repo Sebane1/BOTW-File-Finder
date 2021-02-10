@@ -106,6 +106,9 @@
             this.fileNameView.TabIndex = 4;
             this.fileNameView.SelectedValueChanged += new System.EventHandler(this.fileNameView_SelectedValueChanged);
             this.fileNameView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.fileNameView_MouseDoubleClick);
+            this.fileNameView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.fileNameView_MouseDown);
+            this.fileNameView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.fileNameView_MouseMove);
+            this.fileNameView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.fileNameView_MouseUp);
             // 
             // splitContainer1
             // 
