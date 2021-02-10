@@ -53,18 +53,17 @@ namespace BOTW_File_Finder {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            Text = "BOTW Filer Finder v" + Application.ProductVersion;
+            Text = "BOTW File Finder v" + Application.ProductVersion;
             // read file into a string and deserialize JSON to a type
             botwItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "botw_names.json")));
             baseGame = GetDirectory("baseGame.dir");
             FolderSelectDialog dialog = new FolderSelectDialog();
-            string baseGameModelDir = Path.Combine(baseGame, @"content\Model");
-            if (string.IsNullOrEmpty(baseGame) || !Directory.Exists(baseGameModelDir)) {
+            if (string.IsNullOrEmpty(baseGame) || !Directory.Exists(Path.Combine(baseGame, @"content\Model"))) {
                 while (true) {
                     if (MessageBox.Show("Please assign the base game folder for your BoTW dump", "BoTW File Finder") == DialogResult.OK) {
                         if (dialog.ShowDialog() == DialogResult.OK) {
                             baseGame = dialog.SelectedPath;
-                            if (Directory.Exists(baseGameModelDir)) {
+                            if (Directory.Exists(Path.Combine(baseGame, @"content\Model"))) {
                                 SaveDirectory("baseGame.dir", baseGame);
                                 break;
                             } else {
@@ -84,13 +83,12 @@ namespace BOTW_File_Finder {
             }
             if (!forceExit) {
                 update = GetDirectory("update.dir");
-                string updateModelDir = Path.Combine(update, @"content\Model");
-                if (string.IsNullOrEmpty(update) || !Directory.Exists(updateModelDir)) {
+                if (string.IsNullOrEmpty(update) || !Directory.Exists(Path.Combine(update, @"content\Model"))) {
                     while (true) {
                         if (MessageBox.Show("Please assign the update folder for your BoTW dump", "BoTW File Finder") == DialogResult.OK) {
                             if (dialog.ShowDialog() == DialogResult.OK) {
                                 update = dialog.SelectedPath;
-                                if (Directory.Exists(updateModelDir)) {
+                                if (Directory.Exists(Path.Combine(update, @"content\Model"))) {
                                     SaveDirectory("update.dir", update);
                                     break;
                                 } else {
