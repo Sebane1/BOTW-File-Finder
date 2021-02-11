@@ -260,6 +260,7 @@ namespace BOTW_File_Finder {
                 if (dialog.ShowDialog() == DialogResult.OK) {
                     string toolpath = dialog.FileName;
                     SaveDirectory(@"tooldir\" + Path.GetFileName(dialog.FileName), toolpath);
+                    Process.Start(toolpath, currentFiles[fileNameView.SelectedIndex].FullName);
                 } else {
                     if (MessageBox.Show("Nothing was selected", "BoTW File Finder") == DialogResult.OK) {
                     }
