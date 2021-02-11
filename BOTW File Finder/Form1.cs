@@ -158,6 +158,7 @@ namespace BOTW_File_Finder {
             files = new List<string>();
             files.AddRange(Directory.EnumerateFiles(Path.Combine(baseGame, @"content\Model")));
             files.AddRange(Directory.EnumerateFiles(Path.Combine(update, @"content\Model")));
+            files.AddRange(Directory.EnumerateFiles(Path.Combine(update, @"content\Actor\Pack")));
             if (objectNameView.SelectedItem != null) {
                 currentCopyText = objectNameView.SelectedItem.ToString();
             }
