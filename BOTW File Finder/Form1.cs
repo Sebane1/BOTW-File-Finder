@@ -119,6 +119,7 @@ namespace BOTW_File_Finder {
                     }
                 }
             }
+            CheckToolDirectory();
         }
 
         private void itemView_SelectedValueChanged(object sender, EventArgs e) {
@@ -132,13 +133,19 @@ namespace BOTW_File_Finder {
         }
         private string GetDirectory(string name) {
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, name);
+            return OpenFile(path);
+            return null;
+        }
+
+        private string OpenFile(string path) {
             if (File.Exists(path)) {
                 using (StreamReader reader = new StreamReader(path)) {
                     return reader.ReadLine();
                 }
             }
-            return null;
+            return "";
         }
+
         private void SaveDirectory(string name, string value) {
             using (StreamWriter writer = new StreamWriter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, name))) {
                 writer.WriteLine(value);
@@ -243,6 +250,50 @@ namespace BOTW_File_Finder {
                     args += @"""" + currentFiles[item].FullName + @"""";
                 }
                 Process.Start(toolbox, args);
+            }
+        }
+
+        private void addOptionToolStripMenuItem_Click(object sender, EventArgs e) {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Executable |*.exe";
+            if (MessageBox.Show("Please assign the tool you'd like to open with.", "BoTW File Finder") == DialogResult.OK) {
+                if (dialog.ShowDialog() == DialogResult.OK) {
+                    string toolpath = dialog.FileName;
+                    SaveDirectory(@"tooldir\" + Path.GetFileName(dialog.FileName), toolpath);
+                } else {
+                    if (MessageBox.Show("Nothing was selected", "BoTW File Finder") == DialogResult.OK) {
+                    }
+                }
+            }
+            CheckToolDirectory();
+        }
+        private void CheckToolDirectory() {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"tooldir");
+            if (!Directory.Exists(path)) {
+                Directory.CreateDirectory(path);
+            }
+            openWithToolStripMenuItem.DropDownItems.Clear();
+            foreach (string itemPath in Directory.GetFiles(path)) {
+                ToolStripMenuItem strip = new ToolStripMenuItem();
+                strip.Click += delegate {
+                    string filePath = OpenFile(itemPath);
+                    Process.Start(filePath, currentFiles[fileNameView.SelectedIndex].FullName);
+                };
+                strip.Text = "&" + Path.GetFileNameWithoutExtension(itemPath);
+                openWithToolStripMenuItem.DropDownItems.Add(strip);
+            }
+            ToolStripMenuItem strip2 = new ToolStripMenuItem();
+            strip2.Click += addOptionToolStripMenuItem_Click;
+            strip2.Text = "&Add tool";
+            openWithToolStripMenuItem.DropDownItems.Add(strip2);
+        }
+
+        private void openWithToolStripMenuItem_DropDownOpened(object sender, EventArgs e) {
+        }
+
+        private void fileMenu_Opening(object sender, CancelEventArgs e) {
+            if (fileNameView.SelectedItem == null) {
+                e.Cancel = true;
             }
         }
     }

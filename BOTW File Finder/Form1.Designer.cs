@@ -23,18 +23,23 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.searchBar = new System.Windows.Forms.TextBox();
             this.searchBarLLabel = new System.Windows.Forms.Label();
             this.itemView = new System.Windows.Forms.ListBox();
             this.objectNameView = new System.Windows.Forms.ListBox();
             this.fileNameView = new System.Windows.Forms.ListBox();
+            this.fileMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openWithToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addOptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.copyBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.fullPathText = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.fileMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -97,6 +102,7 @@
             // fileNameView
             // 
             this.fileNameView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.fileNameView.ContextMenuStrip = this.fileMenu;
             this.fileNameView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileNameView.ForeColor = System.Drawing.SystemColors.Window;
             this.fileNameView.FormattingEnabled = true;
@@ -109,6 +115,30 @@
             this.fileNameView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.fileNameView_MouseDown);
             this.fileNameView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.fileNameView_MouseMove);
             this.fileNameView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.fileNameView_MouseUp);
+            // 
+            // fileMenu
+            // 
+            this.fileMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openWithToolStripMenuItem});
+            this.fileMenu.Name = "fileMenu";
+            this.fileMenu.Size = new System.Drawing.Size(181, 48);
+            this.fileMenu.Opening += new System.ComponentModel.CancelEventHandler(this.fileMenu_Opening);
+            // 
+            // openWithToolStripMenuItem
+            // 
+            this.openWithToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addOptionToolStripMenuItem});
+            this.openWithToolStripMenuItem.Name = "openWithToolStripMenuItem";
+            this.openWithToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openWithToolStripMenuItem.Text = "Open with&";
+            this.openWithToolStripMenuItem.DropDownOpened += new System.EventHandler(this.openWithToolStripMenuItem_DropDownOpened);
+            // 
+            // addOptionToolStripMenuItem
+            // 
+            this.addOptionToolStripMenuItem.Name = "addOptionToolStripMenuItem";
+            this.addOptionToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.addOptionToolStripMenuItem.Text = "Add Option";
+            this.addOptionToolStripMenuItem.Click += new System.EventHandler(this.addOptionToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -215,6 +245,7 @@
             this.Name = "Form1";
             this.Text = "BoTW File Finder";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.fileMenu.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -241,6 +272,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox fullPathText;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ContextMenuStrip fileMenu;
+        private System.Windows.Forms.ToolStripMenuItem openWithToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addOptionToolStripMenuItem;
     }
 }
 
