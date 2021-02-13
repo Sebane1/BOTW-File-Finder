@@ -25,7 +25,6 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.searchBar = new System.Windows.Forms.TextBox();
             this.searchBarLLabel = new System.Windows.Forms.Label();
             this.itemView = new System.Windows.Forms.ListBox();
             this.objectNameView = new System.Windows.Forms.ListBox();
@@ -39,6 +38,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.fullPathText = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.searchBar = new System.Windows.Forms.ComboBox();
+            this.dropdownTimer = new System.Windows.Forms.Timer(this.components);
             this.fileMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -49,18 +50,6 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // searchBar
-            // 
-            this.searchBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.searchBar.ForeColor = System.Drawing.SystemColors.Window;
-            this.searchBar.Location = new System.Drawing.Point(53, 6);
-            this.searchBar.Name = "searchBar";
-            this.searchBar.Size = new System.Drawing.Size(279, 20);
-            this.searchBar.TabIndex = 0;
-            this.searchBar.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // searchBarLLabel
             // 
@@ -121,7 +110,7 @@
             this.fileMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openWithToolStripMenuItem});
             this.fileMenu.Name = "fileMenu";
-            this.fileMenu.Size = new System.Drawing.Size(181, 48);
+            this.fileMenu.Size = new System.Drawing.Size(130, 26);
             this.fileMenu.Opening += new System.ComponentModel.CancelEventHandler(this.fileMenu_Opening);
             // 
             // openWithToolStripMenuItem
@@ -129,7 +118,7 @@
             this.openWithToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addOptionToolStripMenuItem});
             this.openWithToolStripMenuItem.Name = "openWithToolStripMenuItem";
-            this.openWithToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openWithToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.openWithToolStripMenuItem.Text = "Open with&";
             this.openWithToolStripMenuItem.DropDownOpened += new System.EventHandler(this.openWithToolStripMenuItem_DropDownOpened);
             // 
@@ -229,17 +218,39 @@
             this.label2.Text = "Path";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
+            // searchBar
+            // 
+            this.searchBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.searchBar.ForeColor = System.Drawing.SystemColors.Window;
+            this.searchBar.FormattingEnabled = true;
+            this.searchBar.Location = new System.Drawing.Point(54, 6);
+            this.searchBar.MaxDropDownItems = 100;
+            this.searchBar.Name = "searchBar";
+            this.searchBar.Size = new System.Drawing.Size(279, 21);
+            this.searchBar.TabIndex = 10;
+            this.searchBar.SelectedIndexChanged += new System.EventHandler(this.searchBar_SelectedIndexChanged);
+            this.searchBar.SelectionChangeCommitted += new System.EventHandler(this.searchBar_SelectionChangeCommitted);
+            this.searchBar.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.searchBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchBar_KeyDown);
+            // 
+            // dropdownTimer
+            // 
+            this.dropdownTimer.Interval = 1000;
+            this.dropdownTimer.Tick += new System.EventHandler(this.dropdownTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(630, 265);
+            this.Controls.Add(this.searchBar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.fullPathText);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.copyBox);
             this.Controls.Add(this.searchBarLLabel);
-            this.Controls.Add(this.searchBar);
             this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -260,8 +271,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox searchBar;
         private System.Windows.Forms.Label searchBarLLabel;
         private System.Windows.Forms.ListBox itemView;
         private System.Windows.Forms.ListBox objectNameView;
@@ -275,6 +284,8 @@
         private System.Windows.Forms.ContextMenuStrip fileMenu;
         private System.Windows.Forms.ToolStripMenuItem openWithToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addOptionToolStripMenuItem;
+        private System.Windows.Forms.ComboBox searchBar;
+        private System.Windows.Forms.Timer dropdownTimer;
     }
 }
 

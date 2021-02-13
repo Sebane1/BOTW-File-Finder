@@ -18,17 +18,17 @@ namespace BOTW_File_Finder {
         }
         private Dictionary<string, string> botwItems = new Dictionary<string, string>();
         private Dictionary<string, List<string>> itemFileAssociations = new Dictionary<string, List<string>>();
-        string baseGame = @"I:\1. Botw USA Base Game (9400)\Botw USA Base Game (9400)\The Legend of Zelda Breath of the Wild\content";
-        string update = @"I:\cemu_1.13.0\mlc01\usr\title\00050000\101C9400\content";
-        string dlc = @"I:\cemu_1.13.0\mlc01\usr\title\0005000c\101c9400\content\0010";
+        string baseGame = "";
+        string update = "";
+        string dlc = "";
         private List<string> files;
-        private string toolbox = @"M:\Toolbox-Latest\toolbox.exe";
         private FileInfo[] currentFiles;
         private bool forceExit;
         private string currentCopyText;
         private string currentPathText;
         private bool canDoDragDrop;
         private Point startPos;
+        private bool valueSetByProgram;
 
         private void label1_Click(object sender, EventArgs e) {
 
@@ -43,6 +43,26 @@ namespace BOTW_File_Finder {
             } else {
                 int index = GetClosestResult(itemView.Items, searchBar.Text);
                 itemView.SelectedIndex = index > -1 ? index : itemView.SelectedIndex;
+            }
+            if (!valueSetByProgram) {
+                int originalSelection = searchBar.SelectionStart;
+                searchBar.Items.Clear();
+                if (searchBar.Text.Length > 0) {
+                    foreach (string item in itemView.Items) {
+                        if (item.ToLower().Contains(searchBar.Text.ToLower())) {
+                            searchBar.Items.Add(item);
+                        }
+                    }
+                    searchBar.Focus();
+                    searchBar.SelectionStart = originalSelection;
+                    if (searchBar.Items.Count > 1) {
+                        dropdownTimer.Stop();
+                        dropdownTimer.Start();
+                    }
+                }
+            } else {
+                dropdownTimer.Stop();
+                valueSetByProgram = false;
             }
         }
 
@@ -159,6 +179,7 @@ namespace BOTW_File_Finder {
             files.AddRange(Directory.EnumerateFiles(Path.Combine(baseGame, @"content\Model")));
             files.AddRange(Directory.EnumerateFiles(Path.Combine(update, @"content\Model")));
             files.AddRange(Directory.EnumerateFiles(Path.Combine(update, @"content\Actor\Pack")));
+            files.AddRange(Directory.EnumerateFiles(Path.Combine(update, @"content\UI\StockItem")));
             if (objectNameView.SelectedItem != null) {
                 currentCopyText = objectNameView.SelectedItem.ToString();
             }
@@ -250,7 +271,7 @@ namespace BOTW_File_Finder {
                 foreach (int item in fileNameView.SelectedIndices) {
                     args += @"""" + currentFiles[item].FullName + @"""";
                 }
-                Process.Start(toolbox, args);
+                //Process.Start(toolbox, args);
             }
         }
 
@@ -297,6 +318,29 @@ namespace BOTW_File_Finder {
             if (fileNameView.SelectedItem == null) {
                 e.Cancel = true;
             }
+        }
+
+        private void searchBar_SelectedIndexChanged(object sender, EventArgs e) {
+            valueSetByProgram = true;
+        }
+
+
+        private void searchBar_SelectionChangeCommitted(object sender, EventArgs e) {
+            valueSetByProgram = true;
+        }
+
+        private void dropdownTimer_Tick(object sender, EventArgs e) {
+            if (!searchBar.DroppedDown) {
+                searchBar.DroppedDown = true;
+            }
+            dropdownTimer.Stop();
+        }
+
+        private void searchBar_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Down) {
+                valueSetByProgram = true;
+            }
+            dropdownTimer.Stop();
         }
     }
 }
