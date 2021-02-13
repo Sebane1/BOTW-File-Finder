@@ -1,4 +1,6 @@
-﻿namespace BOTW_File_Finder {
+﻿using BrightIdeasSoftware;
+
+namespace BOTW_File_Finder {
     partial class Form1 {
         /// <summary>
         /// Required designer variable.
@@ -40,6 +42,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.searchBar = new System.Windows.Forms.ComboBox();
             this.dropdownTimer = new System.Windows.Forms.Timer(this.components);
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.basicPage = new System.Windows.Forms.TabPage();
+            this.advancedPage = new System.Windows.Forms.TabPage();
+            this.advancedView = new BrightIdeasSoftware.FastObjectListView();
+            this.nameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.advancedListPopulationTimer = new System.Windows.Forms.Timer(this.components);
             this.fileMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -49,6 +57,10 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.tabControl.SuspendLayout();
+            this.basicPage.SuspendLayout();
+            this.advancedPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.advancedView)).BeginInit();
             this.SuspendLayout();
             // 
             // searchBarLLabel
@@ -71,7 +83,7 @@
             this.itemView.FormattingEnabled = true;
             this.itemView.Location = new System.Drawing.Point(0, 0);
             this.itemView.Name = "itemView";
-            this.itemView.Size = new System.Drawing.Size(208, 200);
+            this.itemView.Size = new System.Drawing.Size(209, 178);
             this.itemView.TabIndex = 2;
             this.itemView.SelectedValueChanged += new System.EventHandler(this.itemView_SelectedValueChanged);
             // 
@@ -83,7 +95,7 @@
             this.objectNameView.FormattingEnabled = true;
             this.objectNameView.Location = new System.Drawing.Point(0, 0);
             this.objectNameView.Name = "objectNameView";
-            this.objectNameView.Size = new System.Drawing.Size(209, 200);
+            this.objectNameView.Size = new System.Drawing.Size(210, 178);
             this.objectNameView.TabIndex = 3;
             this.objectNameView.SelectedIndexChanged += new System.EventHandler(this.objectNameView_SelectedIndexChanged);
             this.objectNameView.SelectedValueChanged += new System.EventHandler(this.objectNameView_SelectedValueChanged);
@@ -97,7 +109,7 @@
             this.fileNameView.FormattingEnabled = true;
             this.fileNameView.Location = new System.Drawing.Point(0, 0);
             this.fileNameView.Name = "fileNameView";
-            this.fileNameView.Size = new System.Drawing.Size(190, 200);
+            this.fileNameView.Size = new System.Drawing.Size(192, 178);
             this.fileNameView.TabIndex = 4;
             this.fileNameView.SelectedValueChanged += new System.EventHandler(this.fileNameView_SelectedValueChanged);
             this.fileNameView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.fileNameView_MouseDoubleClick);
@@ -131,11 +143,9 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.BackColor = System.Drawing.Color.Black;
-            this.splitContainer1.Location = new System.Drawing.Point(7, 60);
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -146,8 +156,8 @@
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Black;
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(615, 200);
-            this.splitContainer1.SplitterDistance = 208;
+            this.splitContainer1.Size = new System.Drawing.Size(619, 178);
+            this.splitContainer1.SplitterDistance = 209;
             this.splitContainer1.TabIndex = 5;
             // 
             // splitContainer2
@@ -163,8 +173,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.fileNameView);
-            this.splitContainer2.Size = new System.Drawing.Size(403, 200);
-            this.splitContainer2.SplitterDistance = 209;
+            this.splitContainer2.Size = new System.Drawing.Size(406, 178);
+            this.splitContainer2.SplitterDistance = 210;
             this.splitContainer2.TabIndex = 5;
             // 
             // copyBox
@@ -205,6 +215,8 @@
             this.fullPathText.Size = new System.Drawing.Size(569, 20);
             this.fullPathText.TabIndex = 8;
             this.fullPathText.TextChanged += new System.EventHandler(this.fullPathText_TextChanged);
+            this.fullPathText.MouseDown += new System.Windows.Forms.MouseEventHandler(this.fullPathText_MouseDown);
+            this.fullPathText.MouseMove += new System.Windows.Forms.MouseEventHandler(this.fullPathText_MouseMove);
             // 
             // label2
             // 
@@ -226,32 +238,116 @@
             this.searchBar.ForeColor = System.Drawing.SystemColors.Window;
             this.searchBar.FormattingEnabled = true;
             this.searchBar.Location = new System.Drawing.Point(54, 6);
-            this.searchBar.MaxDropDownItems = 100;
+            this.searchBar.MaxDropDownItems = 20;
             this.searchBar.Name = "searchBar";
             this.searchBar.Size = new System.Drawing.Size(279, 21);
             this.searchBar.TabIndex = 10;
             this.searchBar.SelectedIndexChanged += new System.EventHandler(this.searchBar_SelectedIndexChanged);
             this.searchBar.SelectionChangeCommitted += new System.EventHandler(this.searchBar_SelectionChangeCommitted);
+            this.searchBar.DropDownClosed += new System.EventHandler(this.searchBar_DropDownClosed);
             this.searchBar.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.searchBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchBar_KeyDown);
+            this.searchBar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.searchBar_MouseClick);
             // 
             // dropdownTimer
             // 
             this.dropdownTimer.Interval = 1000;
             this.dropdownTimer.Tick += new System.EventHandler(this.dropdownTimer_Tick);
             // 
+            // tabControl
+            // 
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl.Controls.Add(this.basicPage);
+            this.tabControl.Controls.Add(this.advancedPage);
+            this.tabControl.Location = new System.Drawing.Point(0, 58);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(633, 210);
+            this.tabControl.TabIndex = 11;
+            this.tabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl_DrawItem);
+            this.tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl_Selected);
+            // 
+            // basicPage
+            // 
+            this.basicPage.BackColor = System.Drawing.Color.Black;
+            this.basicPage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("basicPage.BackgroundImage")));
+            this.basicPage.Controls.Add(this.splitContainer1);
+            this.basicPage.Location = new System.Drawing.Point(4, 22);
+            this.basicPage.Name = "basicPage";
+            this.basicPage.Padding = new System.Windows.Forms.Padding(3);
+            this.basicPage.Size = new System.Drawing.Size(625, 184);
+            this.basicPage.TabIndex = 0;
+            this.basicPage.Text = "Basic";
+            // 
+            // advancedPage
+            // 
+            this.advancedPage.BackColor = System.Drawing.Color.Black;
+            this.advancedPage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("advancedPage.BackgroundImage")));
+            this.advancedPage.Controls.Add(this.advancedView);
+            this.advancedPage.Location = new System.Drawing.Point(4, 22);
+            this.advancedPage.Name = "advancedPage";
+            this.advancedPage.Padding = new System.Windows.Forms.Padding(3);
+            this.advancedPage.Size = new System.Drawing.Size(625, 184);
+            this.advancedPage.TabIndex = 1;
+            this.advancedPage.Text = "Advanced";
+            // 
+            // advancedView
+            // 
+            this.advancedView.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
+            this.advancedView.AllColumns.Add(this.nameColumn);
+            this.advancedView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.advancedView.CellEditUseWholeCell = false;
+            this.advancedView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.nameColumn});
+            this.advancedView.ContextMenuStrip = this.fileMenu;
+            this.advancedView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.advancedView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.advancedView.ForeColor = System.Drawing.SystemColors.Window;
+            this.advancedView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.advancedView.HideSelection = false;
+            this.advancedView.Location = new System.Drawing.Point(3, 3);
+            this.advancedView.MultiSelect = false;
+            this.advancedView.Name = "advancedView";
+            this.advancedView.ShowGroups = false;
+            this.advancedView.Size = new System.Drawing.Size(619, 178);
+            this.advancedView.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.advancedView.TabIndex = 0;
+            this.advancedView.UseCompatibleStateImageBehavior = false;
+            this.advancedView.View = System.Windows.Forms.View.List;
+            this.advancedView.VirtualMode = true;
+            this.advancedView.SelectionChanged += new System.EventHandler(this.advancedView_SelectionChanged);
+            this.advancedView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.advancedView_ItemSelectionChanged);
+            this.advancedView.SelectedIndexChanged += new System.EventHandler(this.advancedView_SelectedIndexChanged);
+            this.advancedView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.fullPathText_MouseDown);
+            this.advancedView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.fullPathText_MouseMove);
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.AspectName = "Name";
+            this.nameColumn.IsEditable = false;
+            this.nameColumn.Text = "Name";
+            this.nameColumn.Width = 300;
+            this.nameColumn.WordWrap = true;
+            // 
+            // advancedListPopulationTimer
+            // 
+            this.advancedListPopulationTimer.Interval = 200;
+            this.advancedListPopulationTimer.Tick += new System.EventHandler(this.advancedListPopulationTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(630, 265);
+            this.Controls.Add(this.tabControl);
             this.Controls.Add(this.searchBar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.fullPathText);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.copyBox);
             this.Controls.Add(this.searchBarLLabel);
-            this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "BoTW File Finder";
@@ -265,6 +361,10 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
+            this.basicPage.ResumeLayout(false);
+            this.advancedPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.advancedView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -286,6 +386,12 @@
         private System.Windows.Forms.ToolStripMenuItem addOptionToolStripMenuItem;
         private System.Windows.Forms.ComboBox searchBar;
         private System.Windows.Forms.Timer dropdownTimer;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage basicPage;
+        private System.Windows.Forms.TabPage advancedPage;
+        private FastObjectListView advancedView;
+        private OLVColumn nameColumn;
+        private System.Windows.Forms.Timer advancedListPopulationTimer;
     }
 }
 

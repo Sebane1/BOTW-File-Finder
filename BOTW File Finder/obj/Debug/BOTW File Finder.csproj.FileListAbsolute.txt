@@ -11,3 +11,6 @@ C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Debug\BOTW Fil
 C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Debug\BOTW File Finder.csproj.CopyComplete
 C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Debug\BOTW File Finder.exe
 C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Debug\BOTW File Finder.pdb
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Debug\ObjectListView.dll
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Debug\ObjectListView.pdb
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Debug\ObjectListView.xml

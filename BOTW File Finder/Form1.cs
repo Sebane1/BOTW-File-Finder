@@ -18,7 +18,9 @@ namespace BOTW_File_Finder {
         }
         private Dictionary<string, string> botwItems = new Dictionary<string, string>();
         private Dictionary<string, List<string>> itemFileAssociations = new Dictionary<string, List<string>>();
+        private Dictionary<string, BoTWFile> allRawFiles = new Dictionary<string, BoTWFile>();
         string baseGame = "";
+        private FolderSelectDialog dialog;
         string update = "";
         string dlc = "";
         private List<string> files;
@@ -29,40 +31,81 @@ namespace BOTW_File_Finder {
         private bool canDoDragDrop;
         private Point startPos;
         private bool valueSetByProgram;
+        private bool populatedListAlready;
+        private int advancedIndexProgress;
+        private List<string> list;
+        private List<BoTWFile> botwFileReferences;
 
         private void label1_Click(object sender, EventArgs e) {
 
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e) {
-            if (itemView.Items.Contains(searchBar.Text)) {
-                int index = itemView.Items.IndexOf(searchBar.Text);
-                if (index > -1) {
-                    itemView.SelectedIndex = index;
+            if (tabControl.SelectedTab.Text == "Basic") {
+                if (itemView.Items.Contains(searchBar.Text)) {
+                    int index = itemView.Items.IndexOf(searchBar.Text);
+                    if (index > -1) {
+                        itemView.SelectedIndex = index;
+                    }
+                } else {
+                    int index = GetClosestResult(itemView.Items, searchBar.Text);
+                    itemView.SelectedIndex = index > -1 ? index : itemView.SelectedIndex;
                 }
-            } else {
-                int index = GetClosestResult(itemView.Items, searchBar.Text);
-                itemView.SelectedIndex = index > -1 ? index : itemView.SelectedIndex;
-            }
-            if (!valueSetByProgram) {
-                int originalSelection = searchBar.SelectionStart;
-                searchBar.Items.Clear();
-                if (searchBar.Text.Length > 0) {
-                    foreach (string item in itemView.Items) {
-                        if (item.ToLower().Contains(searchBar.Text.ToLower())) {
-                            searchBar.Items.Add(item);
+                if (!valueSetByProgram) {
+                    int originalSelection = searchBar.SelectionStart;
+                    searchBar.Items.Clear();
+                    if (searchBar.Text.Length > 0) {
+                        foreach (string item in itemView.Items) {
+                            if (item.ToLower().Contains(searchBar.Text.ToLower())) {
+                                searchBar.Items.Add(item);
+                            }
+                        }
+                        searchBar.Focus();
+                        searchBar.SelectionStart = originalSelection;
+                        if (searchBar.Items.Count > 1) {
+                            dropdownTimer.Stop();
+                            dropdownTimer.Start();
                         }
                     }
-                    searchBar.Focus();
-                    searchBar.SelectionStart = originalSelection;
-                    if (searchBar.Items.Count > 1) {
+                } else {
+                    dropdownTimer.Stop();
+                    valueSetByProgram = false;
+                }
+            } else {
+                if (allRawFiles.ContainsKey(searchBar.Text)) {
+                    fullPathText.Text = allRawFiles[searchBar.Text].Filepath;
+                    currentPathText = allRawFiles[searchBar.Text].Filepath;
+                    fullPathText.Text = currentPathText;
+                    currentCopyText = searchBar.Text;
+                    copyBox.Text = currentCopyText;
+                    if (!allRawFiles[searchBar.Text].AddedToList) {
+                        advancedView.AddObject(allRawFiles[searchBar.Text]);
+                        allRawFiles[searchBar.Text].AddedToList = true;
+                    }
+                    advancedView.SelectObject(allRawFiles[searchBar.Text]);
+                    advancedView.EnsureModelVisible(allRawFiles[searchBar.Text]);
+                } else {
+                    string result = Path.GetFileName(GetClosestResult(list, searchBar.Text));
+                    if (allRawFiles.ContainsKey(result)) {
+                        currentPathText = allRawFiles[result].Filepath;
+                        fullPathText.Text = currentPathText;
+                        currentCopyText = result;
+                        copyBox.Text = currentCopyText;
+                        advancedView.SelectObject(allRawFiles[result]);
+                        advancedView.EnsureModelVisible(allRawFiles[result]);
+                    }
+                }
+                if (!valueSetByProgram) {
+                    int originalSelection = searchBar.SelectionStart;
+                    if (searchBar.Text.Length > 0) {
+                        searchBar.Focus();
+                        searchBar.SelectionStart = originalSelection;
                         dropdownTimer.Stop();
                         dropdownTimer.Start();
                     }
+                } else {
+                    dropdownTimer.Stop();
                 }
-            } else {
-                dropdownTimer.Stop();
-                valueSetByProgram = false;
             }
         }
 
@@ -76,12 +119,96 @@ namespace BOTW_File_Finder {
             return -1;
         }
 
+        private string GetClosestResult(List<string> items, string text) {
+            for (int i = 0; i < items.Count; i++) {
+                string stringItem = items[i];
+                if (stringItem.ToLower().Contains(text.ToLower())) {
+                    return stringItem;
+                }
+            }
+            return "";
+        }
+
         private void Form1_Load(object sender, EventArgs e) {
             Text = "BOTW File Finder v" + Application.ProductVersion;
             // read file into a string and deserialize JSON to a type
             botwItems = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "botw_names.json")));
+            dialog = new FolderSelectDialog();
+            CheckBaseGameFolder();
+            if (!forceExit) {
+                CheckUpdateGameFolder();
+                PopulateMainList();
+            }
+            CheckToolDirectory();
+        }
+
+        private void PopulateAdvancedList() {
+            list = new List<string>();
+            list.AddRange(FindAllItems(update));
+            list.AddRange(FindAllItems(baseGame));
+            botwFileReferences = new List<BoTWFile>();
+            foreach (string item in list) {
+                if (!allRawFiles.ContainsKey(Path.GetFileName(item))) {
+                    BoTWFile boTW = new BoTWFile(Path.GetFileName(item), item);
+                    allRawFiles.Add(Path.GetFileName(item), boTW);
+                    botwFileReferences.Add(boTW);
+                }
+            }
+            advancedIndexProgress = 0;
+            advancedListPopulationTimer.Start();
+        }
+
+        private List<string> FindAllItems(string searchDirectory) {
+            List<string> allItems = new List<string>();
+            foreach (string file in Directory.EnumerateFiles(searchDirectory)) {
+                allItems.Add(file);
+            }
+            foreach (string directory in Directory.EnumerateDirectories(searchDirectory)) {
+                allItems.AddRange(FindAllItems(directory));
+            }
+            return allItems;
+        }
+
+        private void PopulateMainList() {
+            foreach (var item in botwItems.Keys) {
+                if (!itemFileAssociations.ContainsKey(botwItems[item])) {
+                    itemFileAssociations.Add(botwItems[item], new List<string>() { item });
+                    itemView.Items.Add(botwItems[item]);
+                } else {
+                    itemFileAssociations[botwItems[item]].Add(item);
+                }
+            }
+        }
+
+        private void CheckUpdateGameFolder() {
+            update = GetDirectory("update.dir");
+            if (string.IsNullOrEmpty(update) || !Directory.Exists(Path.Combine(update, @"content\Model"))) {
+                while (true) {
+                    if (MessageBox.Show("Please assign the update folder for your BoTW dump", "BoTW File Finder") == DialogResult.OK) {
+                        if (dialog.ShowDialog() == DialogResult.OK) {
+                            update = dialog.SelectedPath;
+                            if (Directory.Exists(Path.Combine(update, @"content\Model"))) {
+                                SaveDirectory("update.dir", update);
+                                break;
+                            } else {
+                                MessageBox.Show("Invalid directory", "BoTW File Finder");
+                            }
+                        } else {
+                            if (MessageBox.Show("A valid game dump is required for this tool to function properly", "BoTW File Finder") == DialogResult.OK) {
+                                if (MessageBox.Show("Quit program?", "BoTW File Finder", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                                    Application.Exit();
+                                    forceExit = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CheckBaseGameFolder() {
             baseGame = GetDirectory("baseGame.dir");
-            FolderSelectDialog dialog = new FolderSelectDialog();
             if (string.IsNullOrEmpty(baseGame) || !Directory.Exists(Path.Combine(baseGame, @"content\Model"))) {
                 while (true) {
                     if (MessageBox.Show("Please assign the base game folder for your BoTW dump", "BoTW File Finder") == DialogResult.OK) {
@@ -104,42 +231,7 @@ namespace BOTW_File_Finder {
                         }
                     }
                 }
-            }
-            if (!forceExit) {
-                update = GetDirectory("update.dir");
-                if (string.IsNullOrEmpty(update) || !Directory.Exists(Path.Combine(update, @"content\Model"))) {
-                    while (true) {
-                        if (MessageBox.Show("Please assign the update folder for your BoTW dump", "BoTW File Finder") == DialogResult.OK) {
-                            if (dialog.ShowDialog() == DialogResult.OK) {
-                                update = dialog.SelectedPath;
-                                if (Directory.Exists(Path.Combine(update, @"content\Model"))) {
-                                    SaveDirectory("update.dir", update);
-                                    break;
-                                } else {
-                                    MessageBox.Show("Invalid directory", "BoTW File Finder");
-                                }
-                            } else {
-                                if (MessageBox.Show("A valid game dump is required for this tool to function properly", "BoTW File Finder") == DialogResult.OK) {
-                                    if (MessageBox.Show("Quit program?", "BoTW File Finder", MessageBoxButtons.YesNo) == DialogResult.Yes) {
-                                        Application.Exit();
-                                        forceExit = true;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                foreach (var item in botwItems.Keys) {
-                    if (!itemFileAssociations.ContainsKey(botwItems[item])) {
-                        itemFileAssociations.Add(botwItems[item], new List<string>() { item });
-                        itemView.Items.Add(botwItems[item]);
-                    } else {
-                        itemFileAssociations[botwItems[item]].Add(item);
-                    }
-                }
-            }
-            CheckToolDirectory();
+            };
         }
 
         private void itemView_SelectedValueChanged(object sender, EventArgs e) {
@@ -154,7 +246,6 @@ namespace BOTW_File_Finder {
         private string GetDirectory(string name) {
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, name);
             return OpenFile(path);
-            return null;
         }
 
         private string OpenFile(string path) {
@@ -312,6 +403,7 @@ namespace BOTW_File_Finder {
         }
 
         private void openWithToolStripMenuItem_DropDownOpened(object sender, EventArgs e) {
+
         }
 
         private void fileMenu_Opening(object sender, CancelEventArgs e) {
@@ -327,11 +419,31 @@ namespace BOTW_File_Finder {
 
         private void searchBar_SelectionChangeCommitted(object sender, EventArgs e) {
             valueSetByProgram = true;
+            if (tabControl.SelectedTab.Text == advancedPage.Text) {
+                searchBar.Text = allRawFiles[searchBar.SelectedItem as string].Filepath;
+            }
         }
 
         private void dropdownTimer_Tick(object sender, EventArgs e) {
-            if (!searchBar.DroppedDown) {
-                searchBar.DroppedDown = true;
+            if ((tabControl.SelectedTab.Text == "Basic")) {
+                if (!searchBar.DroppedDown) {
+                    searchBar.DroppedDown = true;
+                }
+            }
+            if (tabControl.SelectedTab.Text == advancedPage.Text) {
+                if (!valueSetByProgram) {
+                    searchBar.Items.Clear();
+                    foreach (string item in list) {
+                        if (item.ToLower().Contains(searchBar.Text.ToLower())) {
+                            searchBar.Items.Add(Path.GetFileName(item));
+                        }
+                    }
+                    if (searchBar.Items.Count > 1) {
+                        if (!searchBar.DroppedDown) {
+                            searchBar.DroppedDown = true;
+                        }
+                    }
+                }
             }
             dropdownTimer.Stop();
         }
@@ -339,8 +451,99 @@ namespace BOTW_File_Finder {
         private void searchBar_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Down) {
                 valueSetByProgram = true;
+            } else {
+                valueSetByProgram = false;
             }
             dropdownTimer.Stop();
+        }
+
+        private void tabControl_DrawItem(object sender, DrawItemEventArgs e) {
+            TabPage page = tabControl.TabPages[e.Index];
+            e.Graphics.FillRectangle(new SolidBrush(page.BackColor), e.Bounds);
+
+            Rectangle paddedBounds = e.Bounds;
+            int yOffset = (e.State == DrawItemState.Selected) ? -2 : 1;
+            paddedBounds.Offset(1, yOffset);
+            TextRenderer.DrawText(e.Graphics, page.Text, e.Font, paddedBounds, page.ForeColor);
+        }
+
+        private void advancedView_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+        private void tabControl_Selected(object sender, TabControlEventArgs e) {
+            searchBar.Items.Clear();
+            searchBar.Text = "";
+            currentPathText = "";
+            fullPathText.Text = currentPathText;
+            currentCopyText = "";
+            copyBox.Text = currentCopyText;
+            if (e.TabPage.Text == advancedPage.Text) {
+                if (!populatedListAlready) {
+                    PopulateAdvancedList();
+                    populatedListAlready = true;
+                }
+            }
+        }
+
+        private void advancedListPopulationTimer_Tick(object sender, EventArgs e) {
+            int index = advancedView.SelectedIndex;
+            for (int i = 0; i < 100; i++) {
+                //if (!allRawFiles.ContainsKey(Path.GetFileName(item))) {
+                //    allRawFiles.Add(Path.GetFileName(item), item);
+                //}
+                if (advancedIndexProgress < botwFileReferences.Count) {
+                    if (!botwFileReferences[advancedIndexProgress].AddedToList) {
+                        advancedView.AddObject(botwFileReferences[advancedIndexProgress]);
+                        botwFileReferences[advancedIndexProgress].AddedToList = true;
+                    }
+                } else {
+                    advancedListPopulationTimer.Stop();
+                    break;
+                }
+                advancedIndexProgress++;
+            }
+            advancedView.SelectedIndex = index;
+        }
+
+        private void fullPathText_MouseDown(object sender, MouseEventArgs e) {
+            startPos = e.Location;
+            canDoDragDrop = true;
+        }
+
+        private void fullPathText_MouseMove(object sender, MouseEventArgs e) {
+            if ((e.X != startPos.X || startPos.Y != e.Y) && canDoDragDrop) {
+                if (fullPathText.Text.Length > 0) {
+                    DataObject fileDragData = new DataObject(DataFormats.FileDrop, new string[] { fullPathText.Text });
+                    DoDragDrop(fileDragData, DragDropEffects.Copy);
+                }
+                canDoDragDrop = false;
+            }
+        }
+
+        private void searchBar_DropDownClosed(object sender, EventArgs e) {
+            valueSetByProgram = true;
+        }
+
+        private void searchBar_MouseClick(object sender, MouseEventArgs e) {
+            //if (searchBar.DroppedDown) {
+            //    valueSetByProgram = true;
+            //}
+        }
+
+        private void advancedView_SelectionChanged(object sender, EventArgs e) {
+
+        }
+
+        private void advancedView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e) {
+            if (tabControl.SelectedTab.Text == advancedPage.Text) {
+                if (advancedView.SelectedItem != null) {
+                    currentPathText = (advancedView.SelectedItem.RowObject as BoTWFile).Filepath;
+                    fullPathText.Text = currentPathText;
+                    currentCopyText = (advancedView.SelectedItem.RowObject as BoTWFile).Name;
+                    copyBox.Text = currentCopyText;
+                }
+            }
         }
     }
 }

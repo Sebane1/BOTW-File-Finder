@@ -2,8 +2,9 @@ C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Release\BOTW F
 C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Release\BOTW File Finder.exe
 C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Release\BOTW File Finder.pdb
 C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Release\Newtonsoft.Json.dll
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Release\ObjectListView.dll
 C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Release\Newtonsoft.Json.xml
-C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Release\BOTW File Finder.csprojAssemblyReference.cache
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Release\ObjectListView.pdb
 C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Release\BOTW_File_Finder.Form1.resources
 C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Release\BOTW_File_Finder.Properties.Resources.resources
 C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Release\BOTW File Finder.csproj.GenerateResource.cache
@@ -11,3 +12,5 @@ C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Release\BOTW F
 C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Release\BOTW File Finder.csproj.CopyComplete
 C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Release\BOTW File Finder.exe
 C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Release\BOTW File Finder.pdb
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\bin\Release\ObjectListView.xml
+C:\Users\stel9\source\repos\BOTW File Finder\BOTW File Finder\obj\Release\BOTW File Finder.csprojAssemblyReference.cache
