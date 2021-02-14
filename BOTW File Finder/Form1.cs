@@ -391,7 +391,7 @@ namespace BOTW_File_Finder {
                 ToolStripMenuItem strip = new ToolStripMenuItem();
                 strip.Click += delegate {
                     string filePath = OpenFile(itemPath);
-                    Process.Start(filePath, currentFiles[fileNameView.SelectedIndex].FullName);
+                    Process.Start(filePath, currentPathText);
                 };
                 strip.Text = "&" + Path.GetFileNameWithoutExtension(itemPath);
                 openWithToolStripMenuItem.DropDownItems.Add(strip);
@@ -407,8 +407,15 @@ namespace BOTW_File_Finder {
         }
 
         private void fileMenu_Opening(object sender, CancelEventArgs e) {
-            if (fileNameView.SelectedItem == null) {
-                e.Cancel = true;
+            if (tabControl.SelectedTab.Text == basicPage.Text) {
+                if (fileNameView.SelectedItem == null) {
+                    e.Cancel = true;
+                }
+            }
+            if (tabControl.SelectedTab.Text == advancedPage.Text) {
+                if (advancedView.SelectedItem == null) {
+                    e.Cancel = true;
+                }
             }
         }
 
