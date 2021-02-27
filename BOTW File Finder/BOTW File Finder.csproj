@@ -50,12 +50,16 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tokenizer">
+      <HintPath>..\..\..\..\Documents\Visual Studio 2015\Projects\Tokenizer.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoTWFile.cs" />
     <Compile Include="FolderSelectDialog.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="MusicDescriptor.cs" />
     <Compile Include="NamedObject.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

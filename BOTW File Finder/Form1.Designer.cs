@@ -43,7 +43,15 @@ namespace BOTW_File_Finder {
             this.searchBar = new System.Windows.Forms.ComboBox();
             this.dropdownTimer = new System.Windows.Forms.Timer(this.components);
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.basicPage = new System.Windows.Forms.TabPage();
+            this.gameFilesPage = new System.Windows.Forms.TabPage();
+            this.musicPage = new System.Windows.Forms.TabPage();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.musicCategoryList = new System.Windows.Forms.ListBox();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.musicFileList = new System.Windows.Forms.ListBox();
+            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.musicGameFileList = new System.Windows.Forms.ListBox();
+            this.musicDescriptionTextBox = new System.Windows.Forms.TextBox();
             this.advancedPage = new System.Windows.Forms.TabPage();
             this.advancedView = new BrightIdeasSoftware.FastObjectListView();
             this.nameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -58,7 +66,20 @@ namespace BOTW_File_Finder {
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.tabControl.SuspendLayout();
-            this.basicPage.SuspendLayout();
+            this.gameFilesPage.SuspendLayout();
+            this.musicPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
+            this.splitContainer5.Panel1.SuspendLayout();
+            this.splitContainer5.Panel2.SuspendLayout();
+            this.splitContainer5.SuspendLayout();
             this.advancedPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedView)).BeginInit();
             this.SuspendLayout();
@@ -259,27 +280,145 @@ namespace BOTW_File_Finder {
             this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Controls.Add(this.basicPage);
+            this.tabControl.Controls.Add(this.gameFilesPage);
+            this.tabControl.Controls.Add(this.musicPage);
             this.tabControl.Controls.Add(this.advancedPage);
             this.tabControl.Location = new System.Drawing.Point(0, 58);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(633, 210);
+            this.tabControl.Size = new System.Drawing.Size(633, 260);
             this.tabControl.TabIndex = 11;
             this.tabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl_DrawItem);
             this.tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl_Selected);
             // 
-            // basicPage
+            // gameFilesPage
             // 
-            this.basicPage.BackColor = System.Drawing.Color.Black;
-            this.basicPage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("basicPage.BackgroundImage")));
-            this.basicPage.Controls.Add(this.splitContainer1);
-            this.basicPage.Location = new System.Drawing.Point(4, 22);
-            this.basicPage.Name = "basicPage";
-            this.basicPage.Padding = new System.Windows.Forms.Padding(3);
-            this.basicPage.Size = new System.Drawing.Size(625, 184);
-            this.basicPage.TabIndex = 0;
-            this.basicPage.Text = "Basic";
+            this.gameFilesPage.BackColor = System.Drawing.Color.Black;
+            this.gameFilesPage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("gameFilesPage.BackgroundImage")));
+            this.gameFilesPage.Controls.Add(this.splitContainer1);
+            this.gameFilesPage.Location = new System.Drawing.Point(4, 22);
+            this.gameFilesPage.Name = "gameFilesPage";
+            this.gameFilesPage.Padding = new System.Windows.Forms.Padding(3);
+            this.gameFilesPage.Size = new System.Drawing.Size(625, 184);
+            this.gameFilesPage.TabIndex = 0;
+            this.gameFilesPage.Text = "Basic";
+            // 
+            // musicPage
+            // 
+            this.musicPage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("musicPage.BackgroundImage")));
+            this.musicPage.Controls.Add(this.splitContainer3);
+            this.musicPage.Location = new System.Drawing.Point(4, 22);
+            this.musicPage.Name = "musicPage";
+            this.musicPage.Size = new System.Drawing.Size(625, 234);
+            this.musicPage.TabIndex = 2;
+            this.musicPage.Text = "Music";
+            this.musicPage.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.musicCategoryList);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
+            this.splitContainer3.Size = new System.Drawing.Size(625, 234);
+            this.splitContainer3.SplitterDistance = 152;
+            this.splitContainer3.TabIndex = 0;
+            // 
+            // musicCategoryList
+            // 
+            this.musicCategoryList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.musicCategoryList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.musicCategoryList.ForeColor = System.Drawing.SystemColors.Window;
+            this.musicCategoryList.FormattingEnabled = true;
+            this.musicCategoryList.Location = new System.Drawing.Point(0, 0);
+            this.musicCategoryList.Name = "musicCategoryList";
+            this.musicCategoryList.Size = new System.Drawing.Size(152, 234);
+            this.musicCategoryList.TabIndex = 0;
+            this.musicCategoryList.SelectedIndexChanged += new System.EventHandler(this.musicCategoryList_SelectedIndexChanged);
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.musicFileList);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.splitContainer5);
+            this.splitContainer4.Size = new System.Drawing.Size(469, 234);
+            this.splitContainer4.SplitterDistance = 156;
+            this.splitContainer4.TabIndex = 0;
+            // 
+            // musicFileList
+            // 
+            this.musicFileList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.musicFileList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.musicFileList.ForeColor = System.Drawing.SystemColors.Window;
+            this.musicFileList.FormattingEnabled = true;
+            this.musicFileList.Location = new System.Drawing.Point(0, 0);
+            this.musicFileList.Name = "musicFileList";
+            this.musicFileList.Size = new System.Drawing.Size(156, 234);
+            this.musicFileList.TabIndex = 1;
+            this.musicFileList.SelectedIndexChanged += new System.EventHandler(this.musicFileList_SelectedIndexChanged);
+            this.musicFileList.SelectedValueChanged += new System.EventHandler(this.musicFileList_SelectedValueChanged);
+            // 
+            // splitContainer5
+            // 
+            this.splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer5.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer5.Name = "splitContainer5";
+            // 
+            // splitContainer5.Panel1
+            // 
+            this.splitContainer5.Panel1.Controls.Add(this.musicGameFileList);
+            // 
+            // splitContainer5.Panel2
+            // 
+            this.splitContainer5.Panel2.Controls.Add(this.musicDescriptionTextBox);
+            this.splitContainer5.Size = new System.Drawing.Size(309, 234);
+            this.splitContainer5.SplitterDistance = 164;
+            this.splitContainer5.TabIndex = 0;
+            // 
+            // musicGameFileList
+            // 
+            this.musicGameFileList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.musicGameFileList.ContextMenuStrip = this.fileMenu;
+            this.musicGameFileList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.musicGameFileList.ForeColor = System.Drawing.SystemColors.Window;
+            this.musicGameFileList.FormattingEnabled = true;
+            this.musicGameFileList.Location = new System.Drawing.Point(0, 0);
+            this.musicGameFileList.Name = "musicGameFileList";
+            this.musicGameFileList.Size = new System.Drawing.Size(164, 234);
+            this.musicGameFileList.TabIndex = 2;
+            this.musicGameFileList.SelectedIndexChanged += new System.EventHandler(this.musicGameFileList_SelectedIndexChanged);
+            this.musicGameFileList.SelectedValueChanged += new System.EventHandler(this.musicGameFileList_SelectedValueChanged);
+            this.musicGameFileList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.musicGameFileList_MouseDoubleClick);
+            this.musicGameFileList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.fullPathText_MouseDown);
+            this.musicGameFileList.MouseMove += new System.Windows.Forms.MouseEventHandler(this.fullPathText_MouseMove);
+            // 
+            // musicDescriptionTextBox
+            // 
+            this.musicDescriptionTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.musicDescriptionTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.musicDescriptionTextBox.ForeColor = System.Drawing.Color.Gold;
+            this.musicDescriptionTextBox.Location = new System.Drawing.Point(0, 0);
+            this.musicDescriptionTextBox.Multiline = true;
+            this.musicDescriptionTextBox.Name = "musicDescriptionTextBox";
+            this.musicDescriptionTextBox.Size = new System.Drawing.Size(141, 234);
+            this.musicDescriptionTextBox.TabIndex = 3;
+            this.musicDescriptionTextBox.Text = "Select something";
+            this.musicDescriptionTextBox.TextChanged += new System.EventHandler(this.musicDescriptionTextBox_TextChanged);
             // 
             // advancedPage
             // 
@@ -289,7 +428,7 @@ namespace BOTW_File_Finder {
             this.advancedPage.Location = new System.Drawing.Point(4, 22);
             this.advancedPage.Name = "advancedPage";
             this.advancedPage.Padding = new System.Windows.Forms.Padding(3);
-            this.advancedPage.Size = new System.Drawing.Size(625, 184);
+            this.advancedPage.Size = new System.Drawing.Size(625, 234);
             this.advancedPage.TabIndex = 1;
             this.advancedPage.Text = "Advanced";
             // 
@@ -311,7 +450,7 @@ namespace BOTW_File_Finder {
             this.advancedView.MultiSelect = false;
             this.advancedView.Name = "advancedView";
             this.advancedView.ShowGroups = false;
-            this.advancedView.Size = new System.Drawing.Size(619, 178);
+            this.advancedView.Size = new System.Drawing.Size(619, 228);
             this.advancedView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.advancedView.TabIndex = 0;
             this.advancedView.UseCompatibleStateImageBehavior = false;
@@ -320,6 +459,7 @@ namespace BOTW_File_Finder {
             this.advancedView.SelectionChanged += new System.EventHandler(this.advancedView_SelectionChanged);
             this.advancedView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.advancedView_ItemSelectionChanged);
             this.advancedView.SelectedIndexChanged += new System.EventHandler(this.advancedView_SelectedIndexChanged);
+            this.advancedView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.advancedView_MouseDoubleClick);
             this.advancedView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.fullPathText_MouseDown);
             this.advancedView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.fullPathText_MouseMove);
             // 
@@ -340,7 +480,7 @@ namespace BOTW_File_Finder {
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(630, 265);
+            this.ClientSize = new System.Drawing.Size(630, 315);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.searchBar);
             this.Controls.Add(this.label2);
@@ -348,6 +488,7 @@ namespace BOTW_File_Finder {
             this.Controls.Add(this.label1);
             this.Controls.Add(this.copyBox);
             this.Controls.Add(this.searchBarLLabel);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "BoTW File Finder";
@@ -362,7 +503,21 @@ namespace BOTW_File_Finder {
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
-            this.basicPage.ResumeLayout(false);
+            this.gameFilesPage.ResumeLayout(false);
+            this.musicPage.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
+            this.splitContainer5.Panel1.ResumeLayout(false);
+            this.splitContainer5.Panel2.ResumeLayout(false);
+            this.splitContainer5.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
+            this.splitContainer5.ResumeLayout(false);
             this.advancedPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedView)).EndInit();
             this.ResumeLayout(false);
@@ -387,11 +542,19 @@ namespace BOTW_File_Finder {
         private System.Windows.Forms.ComboBox searchBar;
         private System.Windows.Forms.Timer dropdownTimer;
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage basicPage;
+        private System.Windows.Forms.TabPage gameFilesPage;
         private System.Windows.Forms.TabPage advancedPage;
         private FastObjectListView advancedView;
         private OLVColumn nameColumn;
         private System.Windows.Forms.Timer advancedListPopulationTimer;
+        private System.Windows.Forms.TabPage musicPage;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.ListBox musicCategoryList;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.ListBox musicFileList;
+        private System.Windows.Forms.SplitContainer splitContainer5;
+        private System.Windows.Forms.ListBox musicGameFileList;
+        private System.Windows.Forms.TextBox musicDescriptionTextBox;
     }
 }
 

@@ -1,0 +1,260 @@
+BGM_Castle | Hyrule Castle
+BGM_Dragon | Dragon Music | When a dragon is near
+BGM_DungeonBattle_main | Shrine Battle Theme | Every battle in shrines
+BGM_DungeonBattle_outro | Shrine Battle Theme | After Test of Strength
+BGM_DungeonTutorial_lesson1 | Combat Tutorial Theme | Combat tutorial in Kakariko Shrine (Ta'loh Naeg)
+BGM_DungeonTutorial_lesson2 | Combat Tutorial Theme | This tutorial is split into 4 phases
+BGM_DungeonTutorial_lesson3 | Combat Tutorial Theme | Every phase has a different track
+BGM_DungeonTutorial_lesson4 | Combat Tutorial Theme | It starts at the beginning
+BGM_DungeonTutorial_outro | Combat Tutorial Theme | After the battle tutorial
+BGM_envDay | Overworld Music | Plays in the overworld during the day(pattern hasn't been figuered out yet)
+BGM_envNight | Overworld Music | Plays in the overworld during the night(pattern hasn't been figuered out yet)
+BGM_FieldBattle | Overworld Music | Plays for normal fights and Yiga and Lynel battles. It works like this. And the exact data can be found here (made by jarnumber9).
+BGM_GanonGrudgeBattle | Divine Beast Battle | Battle in the Devine beasts
+BGM_GrudgeDragon | Dragon Music | Battle against corrupted Naydra (also plays in the area around him)
+BGM_GuardianFixed | Gaurdian Music | Decayed Guardian
+BGM_Guardian_main | Gaurdian Music | Active Guardian (Run)
+BGM_Guardian_outro | Gaurdian Music | Active Guardian defeat
+BGM_horseDay_loop | Horse Music | Riding a Horse during the day
+BGM_horseDay_end | Horse Music | Riding a Horse during the day
+BGM_horseNight_loop | Horse Music | Riding a Horse during the night
+BGM_horseNight_end | Horse Music | Stopping on a Horse during the night
+BGM_RemainsElec_A | Vah Naboris
+BGM_RemainsElec_B0 | Vah Naboris | When a terminal gets activated the next track plays the B tracks start always at the position the previous track left of but during transition A->B and B->Z it starts from the beginning.
+BGM_RemainsElec_B1 | Vah Naboris | When a terminal gets activated the next track plays the B tracks start always at the position the previous track left of but during transition A->B and B->Z it starts from the beginning.
+BGM_RemainsElec_B2 | Vah Naboris | When a terminal gets activated the next track plays the B tracks start always at the position the previous track left of but during transition A->B and B->Z it starts from the beginning.
+BGM_RemainsElec_B3 | Vah Naboris | When a terminal gets activated the next track plays the B tracks start always at the position the previous track left of but during transition A->B and B->Z it starts from the beginning.
+BGM_RemainsElec_Z | Vah Naboris | When a terminal gets activated the next track plays the B tracks start always at the position the previous track left of but during transition A->B and B->Z it starts from the beginning. 
+BGM_RemainsFire_A | Vah Rudania
+BGM_RemainsFire_B0 | Vah Rudania | It also starts from the beginning if the battle music starts playing.
+BGM_RemainsFire_B1 | Vah Rudania | It also starts from the beginning if the battle music starts playing.
+BGM_RemainsFire_B2 | Vah Rudania
+BGM_RemainsFire_B3 | Vah Rudania
+BGM_RemainsFire_Z | Vah Rudania
+BGM_RemainsWater_A | Vah Ruta
+BGM_RemainsWater_B0 | Vah Ruta | B0 starts form the first terminal not from the Guidance Stone.
+BGM_RemainsWater_B1 | Vah Ruta  
+BGM_RemainsWater_B2 | Vah Ruta
+BGM_RemainsWater_B3 | Vah Ruta
+BGM_RemainsWater_Z | Vah Ruta | Z plays when all terminals are activated
+BGM_RemainsWind_A | Vah Medoh
+BGM_RemainsWind_B0 | Vah Medoh
+BGM_RemainsWind_B1 | Vah Medoh
+BGM_RemainsWind_B2 | Vah Medoh
+BGM_RemainsWind_B3 | Vah Medoh
+BGM_RemainsWind_Z | Vah Medoh
+BGM_SpBattle_AssassinBoss | Master Kogah Battle Theme | Battle against Kogah
+BGM_SpBattle_ForestGiant_main | Hinox Battle Theme | Battle against a Hinox
+BGM_SpBattle_ForestGiant_outro | Hinox Battle Theme | Hinox outro
+BGM_SpBattle_GanonBeast_Level1 | Ganon Battle Theme | Battle agains Beast Ganon
+BGM_SpBattle_GanonBeast_Level2 | Ganon Battle Theme | Starts playing after the second side has been shot
+BGM_SpBattle_GanonBeast_Level3 | Ganon Battle Theme | Starts after the belly has been shot
+BGM_SpBattle_Ganon_former | Ganon Battle Theme | Battle against Calamity Ganon
+BGM_SpBattle_Ganon_latter | Ganon Battle Theme | Phase 2
+BGM_SpBattle_Golem_main | Talus Battle Theme | Battle against Talus
+BGM_SpBattle_Golem_outroLong | Talus Battle Theme | Talus outro 
+BGM_SpBattle_RemainsElecBoss | Thunderblight Ganon Theme | Battle against Thunderblight Ganon
+BGM_SpBattle_RemainsElecBoss_latter | Thunderblight Ganon Theme | Phase 2
+BGM_SpBattle_RemainsFireBoss | Fireblight Ganon Theme | Battle against Fireblight Ganon
+BGM_SpBattle_RemainsFireBoss_latter | Fireblight Ganon Theme | Phase 2
+BGM_SpBattle_RemainsWaterBoss | Battle against Waterblight Ganon
+BGM_SpBattle_RemainsWaterBoss_latter | Fireblight Ganon Theme | Phase 2
+BGM_SpBattle_RemainsWindBoss | Windlight Ganon Theme | Battle against Windblight Ganon
+BGM_SpBattle_RemainsWindBoss_latter | Windlight Ganon Theme | Phase 2
+BGM_spBattle_Sandworm_main1 | Molduga Battle Theme | Molduga (buried)
+BGM_spBattle_Sandworm_main2 | Molduga Battle Theme | Molduga (after first hit)
+BGM_spBattle_Sandworm_outro | Molduga Battle Theme | Molduga (outro)
+Bgm_Spot_AkkareAncientLabo | Akkala Ancient Tech Lab
+BGM_Spot_AssassinBase | Yiga Clan Base Theme | Sneaking around the Yiga base
+BGM_Spot_CmnCave | Shrine Found Theme | Shrines in a Cave
+BGM_Spot_CmnGoron | Shrine Found Theme | Shrines near Gorons
+BGM_Spot_CmnHouse | Shrine Found Theme | House in the wild
+BGM_Spot_CmnMountain | Shrine Found Theme | Shrines on mountains
+BGM_Spot_CmnRuins | Shrine Found Theme | Shrines near Ruins
+BGM_Spot_CmnVolcano | Shrine Found Theme | Shrines on the Volcano
+BGM_Spot_CmnWild | Shrine Found Theme | Shrines in the wild
+BGM_Spot_DesertSmallOasis | Kara Kara Bazaar
+BGM_Spot_FairySpring | Fairy Fountain
+BGM_Spot_FlightTrainingSpot | Flight Range
+BGM_Spot_FrontierVillage_GerudoInvited | Tarrey Town Music | Tarrey Town-3
+BGM_Spot_FrontierVillage_GoronInvited | Tarrey Town Music | Tarrey Town-2
+BGM_Spot_FrontierVillage_Married | Tarrey Town Music | Tarrey Town-6
+BGM_Spot_FrontierVillage_RitoInvited | Tarrey Town Music | Tarrey Town-4
+BGM_Spot_FrontierVillage_Start | Tarrey Town Music | Tarrey Town-1
+BGM_Spot_FrontierVillage_ZoraInvited | Tarrey Town Music | Tarrey Town-5
+Bgm_Spot_HatenoAncinetLabo | Hateno Ancient Tech Lab
+BGM_Spot_HorseGod | Malanya Spring
+BGM_Spot_KakarikoVillage_Allday | Kakariko
+Bgm_Spot_MamonoShop | Kilton shop
+BGM_Spot_NewGerudoCity_Allday | Gerudo City
+BGM_Spot_NewGoronCity_Allday | Goron City
+BGM_Spot_NewHatenoVillage_Allday | Hateno
+BGM_Spot_NewKoroguForest_Allday | Korok forest
+BGM_Spot_NewZoraVillage_Allday | Zora Domain
+BGM_Spot_NorthMine | North mine | Lava lake between Goron City and the peak
+BGM_Spot_ObservationPost | Observation post in the desert
+BGM_Spot_RitoVillage_Allday | Rito Village
+BGM_Spot_SheikersTower | Sheikah Tower | Plays on/around Sheikers Towers (apparently the base is the loudest)
+BGM_Spot_SouthernVillage_Allday | Lurelin Village
+BGM_Spot_TempleOfTime | Temple of Time
+BGM_Spot_Umayado | Stable Theme | Stables (channel 3&4 are for Kass)
+BGM_Spot_WaterSide | Shrine Found Theme | (Shrines on/around water)
+BGM_SpSpot_AnimalMaster | Satoru Iwata's Grave | (when he's there)
+BGM_spSpot_CastleTown | Castle Town Ruins | ruins of Castle Town
+BGM_SpSpot_MazeForest_main | Maze Forest Theme | Maze/Lost Woods/dark forest bgm
+BGM_SpSpot_Musician | Kass
+BGM_TemperatureBurn00 | Volcano
+BGM_TemperatureBurn01 | Volcano | Can be replaced with full tracks
+BGM_TemperatureBurn02 | Volcano | If the tracks loop it will only play TemperatureBurn00 (could be wrong)
+BGM_TemperatureBurn03 | Volcano | If they don't the next track plays when the current one is finished
+BGM_TemperatureBurn04 | Volcano
+BGM_TemperatureBurn05 | Volcano
+BGM_TemperatureCold00 | Volcano | Ice areas/ when the temperature is below freezing
+BGM_TemperatureCold01 | Volcano
+BGM_TemperatureCold02 | Volcano
+BGM_TemperatureHot00 | Desert | Desert area, when the sun is shining
+BGM_TemperatureHot01 | Desert
+BGM_TemperatureHot02 | Desert
+BGM_TemperatureHot03 | Desert
+BGM_TemperatureHot04 | Desert
+BGM_TemperatureHot05 | Desert
+BGM_TemperatureHot06 | Desert
+Demo101_0_SoundTrack | The King tells his tale
+Demo102_0_SoundTrack | The Hero Awakens
+Demo103_0_SoundTrack | The Hero sees light
+Demo104_0_SoundTrack | Deku Tree Awakens
+Demo105_0_SoundTrack | Impas tale of Hyrule
+Demo105_1_SoundTrack | Kass tale of Hyrule
+Demo109_1_SoundTrack | Zelda returns the Holy Blade
+Demo109_2_SoundTrack | Link swings the MasterSword
+Demo110_0_SoundTrack | Menacing Vah Rudania
+Demo111_0_SoundTrack | Menacing Vah Medoh
+Demo112_0_SoundTrack | Menacing Vah Ruta
+Demo113_0_SoundTrack | Menacing Vah Naboris
+Demo114_0_SoundTrack | Jumping on Vah Rudania
+Demo115_0_SoundTrack | Defeated FireBlight
+Demo116_0_SoundTrack | VahRudania Aims
+Demo117_0_SoundTrack | Jumping on Vah Medoh
+Demo118_0_SoundTrack | Defeated WindBlight
+Demo119_0_SoundTrack | Vah Medoh Aims
+Demo120_0_SoundTrack | Jumping on Vah Ruta
+Demo121_0_SoundTrack | Defeated WaterBlight
+Demo122_0_SoundTrack | VahRuta Aims
+Demo123_0_SoundTrack | Jumping on Vah Naboris
+Demo124_0_SoundTrack | Defeated ThunderBlight
+Demo125_0_SoundTrack | Vah Naboris Aims
+Demo126_0_SoundTrack | Memory | Memory 1 |  A Boring Ceremony
+Demo127_0_SoundTrack | Memory | Memory 2 |  Zelda Complains
+Demo128_0_SoundTrack | Memory | Memory 3 |  Zelda at the Ruins
+Demo129_0_SoundTrack | Memory | Memory 4 |  Link fights the Yiga
+Demo130_0_SoundTrack | Memory | Memory 5 |  Zelda patches Link up after fights
+Demo131_0_SoundTrack | Memory | Memory 6 |  Eat the Frog
+Demo132_0_SoundTrack | Memory | Memory 7 |  Link & Zelda on Horses
+Demo133_0_SoundTrack | Memory | Memory 8 |  Zelda doubts herself
+Demo134_0_SoundTrack | Memory | Memory 9 |  Zelda & Father
+Demo135_0_SoundTrack | Memory | Memory 10 |  Zelda at the spring
+Demo136_0_SoundTrack | Memory | Memory 11 |  Ganon awakens
+Demo137_0_SoundTrack | Memory | Memory 12 |  Zelda & Link escape
+Demo138_0_SoundTrack | Memory | Memory 13 |  Zelda awakens her power
+Demo139_0_SoundTrack | Epilogue
+Demo140_0_SoundTrack | Castle Battle Music | Enter Hyrule Castle
+Demo141_0_SoundTrack | WindBlight Castle
+Demo141_1_SoundTrack | FireBlight Castle
+Demo141_2_SoundTrack | ThunderBlight Castle
+Demo141_3_SoundTrack | WaterBlight Castle
+Demo141_4_SoundTrack | Blight Fight Intro Castle
+Demo142_0_SoundTrack | Ganon breaks free
+Demo143_0_SoundTrack | Revali Beam
+Demo143_1_SoundTrack | Daruk Beam
+Demo143_2_SoundTrack | Urbosa Beam
+Demo143_3_SoundTrack | Mipha Beam
+Demo143_4_SoundTrack | Beams combined
+Demo145_0_SoundTrack | Ganon defeated
+Demo146_0_SoundTrack | Beast Ganon Battle | Calamaty Ganon & Light Bow
+Demo146_1_SoundTrack | Beast Ganon Battle | Calamaty Ganon & Light Bow (different Horse)
+Demo147_0_SoundTrack | Beast Ganon Battle | Sealing Ganon
+Demo148_0_SoundTrack | Thank you Hero of Hyrule
+Demo149_0_SoundTrack | Credits | Skyward Sword Credits (unused)
+Demo149_1_SoundTrack | Credits | Credits + after-credit-scene
+Demo150_0_SoundTrack | Memory | Memory Daruk
+Demo151_0_SoundTrack | Memory | Memory Revali
+Demo152_0_SoundTrack | Memory | Memory Mipha
+Demo153_0_SoundTrack | Memory | Memory Urbosa
+Demo154_1_SoundTrack | King Rhoam Theme | old man reveals himself
+Demo154_2_SoundTrack | King Rhoam Theme | old man dissapears
+Demo155_0_SoundTrack | WindBlight Ganon intro
+Demo156_0_SoundTrack | Vah Madoh End
+Demo158_0_SoundTrack | ThunderBlight Ganon intro
+Demo159_0_SoundTrack | Vah Naboris End
+Demo160_0_SoundTrack | FireBlight Ganon intro
+Demo161_0_SoundTrack | Vah Rudania End
+Demo162_0_SoundTrack | WaterBlight Ganon intro
+Demo163_0_SoundTrack | Vah Ruto End
+Demo165_0_SoundTrack | Bloodmoon Theme | First Bloodmoon Cutscene
+Demo165_1_SoundTrack | Bloodmoon Theme | Various Bloodmoon Cutscenes
+Demo165_2_SoundTrack | Bloodmoon Theme | Various Bloodmoon Cutscenes
+Demo165_3_SoundTrack | Bloodmoon Theme | Various Bloodmoon Cutscenes
+Demo165_4_SoundTrack | Bloodmoon Theme | Various Bloodmoon Cutscenes
+Demo165_5_SoundTrack | ???
+Demo166_0_SoundTrack | Sheikahtower rises
+Demo174_0_SoundTrack | Meeting new Bird Champion
+Demo175_0_SoundTrack | Meeting Yomu
+Demo176_0_SoundTrack | Meeting Riju
+Demo177_0_SoundTrack | Meeting Sidon
+Event_BGM_AssassinAppear | Yiga appears
+Event_BGM_AssassinBossDemo_loop | Kogah talks
+Event_BGM_FairyAppear | Great Fairy opens fountain
+Event_BGM_FirstGroundLocation | completely new location
+Event_BGM_FlightTraining | Minigame | Minigame at the flight Range
+Event_BGM_GamanContest | Minigame | Minigame |  stand on a hot plate
+Event_BGM_GerudoLeaderDemo | Riju's theme
+Event_BGM_GetMasterSword | Master Sword Getto Da Ze!
+Event_Bgm_GetTrophy | Trophy from Ferudo race
+Event_BGM_IchikaraWedding | Tarrey Town Music | Wedding at Tarrey town
+Event_BGM_Impa | Impa's theme
+Event_BGM_KorogMinister | Korok dance
+Event_BGM_MiniGameGolf | Minigame | Minigame Golf
+Event_BGM_MiniGameHunt | Minigame | Minigame Hunt
+Event_BGM_MiniGameParasail | Minigame | Minigame flying
+Event_Bgm_MinigameRace01 | Minigame | Mingame racing
+Event_BGM_MovingIchikara | Tarrey Town Music | On To Tarrey town
+Event_BGM_MusicianTalkHint1-8 | Shrine Quests from Kass
+Event_BGM_MusicianThemeEnding | Song from Kass
+Event_BGM_PlayerDressUp | Crosdresser Link
+Event_Bgm_RaceStartFanfare | Minigame | 3,2,1 Start
+Event_BGM_RemainsElecBattle | Attacking Vah Naboris | (channels 3&4 only when you are by Riju's side)
+Event_BGM_RemainsFireBattle_A | Attacking Vah Rudania | phase 1
+Event_BGM_RemainsFireBattle_B | Attacking Vah Rudania | phase 2
+Event_BGM_RemainsWaterBattle | Attacking Vah Ruta
+Event_BGM_RemainsWindBattle_Intro | talking before the attack
+Event_BGM_RemainsWindBattle_Main | Attacking Vah Medoh
+Event_BGM_RememberBgm | Memory | Memory intro
+Event_BGM_RememberComplete | Memory | All memories finished
+Event_BGM_RitoBrosDemo | Rito siblings
+Event_BGM_SheikersTowerOpen | Activating Sheiker towers
+Event_BGM_SnowBowling | Minigame | Minigame snow bowling
+Event_BGM_VagrantAppear | Old man falls from the sky
+Event_BGM_ZoraPrinceCheer | Sidon | Sidon Talk Version 1
+Event_BGM_ZoraPrinceTalk | Sidon | Sidon Talk Version 2
+BGM_FinalTrialDungeon_B0 | Final Trial | Final Dungeon
+BGM_FinalTrialDungeon_B1 | Final Trial | behaves like the other dungeon but doesn't use the battle theme and stays with the dungeon theme
+BGM_FinalTrialDungeon_B2 | Final Trial | behaves like the other dungeon but doesn't use the battle theme and stays with the dungeon theme
+BGM_FinalTrialDungeon_B3 | Final Trial
+BGM_FinalTrialDungeon_Z | Final Trial | Starts at the beginning
+BGM_SpBattle_FinalTrialBoss_Level1 | Fight Against Monk
+BGM_SpBattle_FinalTrialBoss_Level2 | Fight Against Monk | Use looping tracks! It starts the next track at the position the previous left off the .bars file doesn't need to be changed for this track (it's weird)
+BGM_SpBattle_FinalTrialBoss_Level3 | Fight Against Monk | Use looping tracks! It starts the next track at the position the previous left off the .bars file doesn't need to be changed for this track (it's weird)
+BGM_SpBattle_FinalTrialBoss_Level4 | Fight Against Monk | Use looping tracks! It starts the next track at the position the previous left off the .bars file doesn't need to be changed for this track (it's weird)
+BGM_SpBattle_FinalTrialBoss_Transform | Fight Against Monk | plays between 1&2 and 2&3
+BGM_Spot_CmnHero | Shrines of the Champion Ballad
+BGM_SpSpot_Acco_Daruk | Kass | Kass at Vah Rudania
+BGM_SpSpot_Acco_Mipha | Kass | Kass at Vah Ruta
+BGM_SpSpot_Acco_Revali | Kass | Kass at Vah Medoh
+BGM_SpSpot_Acco_Urbosa | Kass | Kass at Vah Naboris
+Event_BGM_Acco | Kass | Kass accordion-songs
+Event_BGM_ChampionsBalladClear | Clear different phases of the Ballad
+Event_BGM_CompleteMasterSword | Mastersword Awakening
+Event_BGM_DekuTreeDemo | Deku Tree talking
+Event_BGM_DlcStaffRoll | Champions Ballad credits
+Event_BGM_EnduranceDungeonClear00 | Trial Of The Sword | Trial of the Sword complete 1
+Event_BGM_EnduranceDungeonClear01 | Trial Of The Sword | Trial of the Sword complete 2

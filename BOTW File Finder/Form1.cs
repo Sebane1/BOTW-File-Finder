@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TypingConnector;
 
 namespace BOTW_File_Finder {
     public partial class Form1 : Form {
@@ -19,6 +20,7 @@ namespace BOTW_File_Finder {
         private Dictionary<string, string> botwItems = new Dictionary<string, string>();
         private Dictionary<string, List<string>> itemFileAssociations = new Dictionary<string, List<string>>();
         private Dictionary<string, BoTWFile> allRawFiles = new Dictionary<string, BoTWFile>();
+        private Dictionary<string, List<MusicDescriptor>> musicDescriptorsDictionary = new Dictionary<string, List<MusicDescriptor>>();
         string baseGame = "";
         private FolderSelectDialog dialog;
         string update = "";
@@ -35,13 +37,15 @@ namespace BOTW_File_Finder {
         private int advancedIndexProgress;
         private List<string> list;
         private List<BoTWFile> botwFileReferences;
+        private string musicDescriptionText;
+        private FileInfo[] currentMusicFiles;
 
         private void label1_Click(object sender, EventArgs e) {
 
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e) {
-            if (tabControl.SelectedTab.Text == "Basic") {
+            if (tabControl.SelectedTab.Text == gameFilesPage.Text) {
                 if (itemView.Items.Contains(searchBar.Text)) {
                     int index = itemView.Items.IndexOf(searchBar.Text);
                     if (index > -1) {
@@ -56,6 +60,36 @@ namespace BOTW_File_Finder {
                     searchBar.Items.Clear();
                     if (searchBar.Text.Length > 0) {
                         foreach (string item in itemView.Items) {
+                            if (item.ToLower().Contains(searchBar.Text.ToLower())) {
+                                searchBar.Items.Add(item);
+                            }
+                        }
+                        searchBar.Focus();
+                        searchBar.SelectionStart = originalSelection;
+                        if (searchBar.Items.Count > 1) {
+                            dropdownTimer.Stop();
+                            dropdownTimer.Start();
+                        }
+                    }
+                } else {
+                    dropdownTimer.Stop();
+                    valueSetByProgram = false;
+                }
+            } else if (tabControl.SelectedTab.Text == musicPage.Text) {
+                if (musicCategoryList.Items.Contains(searchBar.Text)) {
+                    int index = musicCategoryList.Items.IndexOf(searchBar.Text);
+                    if (index > -1) {
+                        musicCategoryList.SelectedIndex = index;
+                    }
+                } else {
+                    int index = GetClosestResult(musicCategoryList.Items, searchBar.Text);
+                    musicCategoryList.SelectedIndex = index > -1 ? index : musicCategoryList.SelectedIndex;
+                }
+                if (!valueSetByProgram) {
+                    int originalSelection = searchBar.SelectionStart;
+                    searchBar.Items.Clear();
+                    if (searchBar.Text.Length > 0) {
+                        foreach (string item in musicCategoryList.Items) {
                             if (item.ToLower().Contains(searchBar.Text.ToLower())) {
                                 searchBar.Items.Add(item);
                             }
@@ -110,20 +144,24 @@ namespace BOTW_File_Finder {
         }
 
         private int GetClosestResult(ListBox.ObjectCollection items, string text) {
-            for (int i = 0; i < items.Count; i++) {
-                string stringItem = items[i] as string;
-                if (stringItem.ToLower().Contains(text.ToLower())) {
-                    return i;
+            if (items != null) {
+                for (int i = 0; i < items.Count; i++) {
+                    string stringItem = items[i] as string;
+                    if (stringItem.ToLower().Contains(text.ToLower())) {
+                        return i;
+                    }
                 }
             }
             return -1;
         }
 
         private string GetClosestResult(List<string> items, string text) {
-            for (int i = 0; i < items.Count; i++) {
-                string stringItem = items[i];
-                if (stringItem.ToLower().Contains(text.ToLower())) {
-                    return stringItem;
+            if (items != null) {
+                for (int i = 0; i < items.Count; i++) {
+                    string stringItem = items[i];
+                    if (stringItem.ToLower().Contains(text.ToLower())) {
+                        return stringItem;
+                    }
                 }
             }
             return "";
@@ -138,10 +176,64 @@ namespace BOTW_File_Finder {
             if (!forceExit) {
                 CheckUpdateGameFolder();
                 PopulateMainList();
+                PopulateMusicList();
             }
             CheckToolDirectory();
         }
 
+        private void PopulateMusicList() {
+            List<MusicDescriptor> musicDescriptors = OpenMusicFolder();
+            foreach (MusicDescriptor musicDescriptor in musicDescriptors) {
+                if (!musicDescriptorsDictionary.ContainsKey(musicDescriptor.Category)) {
+                    musicDescriptorsDictionary.Add(musicDescriptor.Category, new List<MusicDescriptor>() { musicDescriptor });
+                } else {
+                    musicDescriptorsDictionary[musicDescriptor.Category].Add(musicDescriptor);
+                }
+            }
+            foreach (string key in musicDescriptorsDictionary.Keys) {
+                musicCategoryList.Items.Add(key);
+            }
+        }
+        private List<MusicDescriptor> OpenMusicFolder() {
+            List<MusicDescriptor> musicList = new List<MusicDescriptor>();
+            using (StreamReader reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MusicList.txt"))) {
+                while (true) {
+                    try {
+                        Tokenizer tokenizer = new Tokenizer(reader.ReadLine());
+                        string token = tokenizer.GetToken();
+                        MusicDescriptor musicDescriptor = new MusicDescriptor();
+                        int index = 0;
+                        while (!string.IsNullOrEmpty(token) && index < 3) {
+                            if (token != "|") {
+                                switch (index) {
+                                    case 0:
+                                        musicDescriptor.Filename += token + " ";
+                                        break;
+                                    case 1:
+                                        musicDescriptor.Category += token + " ";
+                                        break;
+                                    case 2:
+                                        musicDescriptor.Descriptor += token + " ";
+                                        break;
+                                }
+                            } else {
+                                index++;
+                            }
+                            token = tokenizer.GetToken();
+                        }
+                        musicDescriptor.Filename = musicDescriptor.Filename.Trim();
+                        musicDescriptor.Category = musicDescriptor.Category.Trim();
+                        if (!string.IsNullOrEmpty(musicDescriptor.Descriptor)) {
+                            musicDescriptor.Descriptor = musicDescriptor.Descriptor.Trim();
+                        }
+                        musicList.Add(musicDescriptor);
+                    } catch {
+                        break;
+                    }
+                }
+            }
+            return musicList;
+        }
         private void PopulateAdvancedList() {
             list = new List<string>();
             list.AddRange(FindAllItems(update));
@@ -407,13 +499,18 @@ namespace BOTW_File_Finder {
         }
 
         private void fileMenu_Opening(object sender, CancelEventArgs e) {
-            if (tabControl.SelectedTab.Text == basicPage.Text) {
+            if (tabControl.SelectedTab.Text == gameFilesPage.Text) {
                 if (fileNameView.SelectedItem == null) {
                     e.Cancel = true;
                 }
             }
             if (tabControl.SelectedTab.Text == advancedPage.Text) {
                 if (advancedView.SelectedItem == null) {
+                    e.Cancel = true;
+                }
+            }
+            if (tabControl.SelectedTab.Text == musicPage.Text) {
+                if (musicGameFileList.SelectedItem == null) {
                     e.Cancel = true;
                 }
             }
@@ -432,7 +529,7 @@ namespace BOTW_File_Finder {
         }
 
         private void dropdownTimer_Tick(object sender, EventArgs e) {
-            if ((tabControl.SelectedTab.Text == "Basic")) {
+            if ((tabControl.SelectedTab.Text == gameFilesPage.Text || tabControl.SelectedTab.Text == musicPage.Text)) {
                 if (!searchBar.DroppedDown) {
                     searchBar.DroppedDown = true;
                 }
@@ -550,6 +647,80 @@ namespace BOTW_File_Finder {
                     currentCopyText = (advancedView.SelectedItem.RowObject as BoTWFile).Name;
                     copyBox.Text = currentCopyText;
                 }
+            }
+        }
+
+        private void musicCategoryList_SelectedIndexChanged(object sender, EventArgs e) {
+            musicDescriptionTextBox.Text = "";
+            musicFileList.Items.Clear();
+            musicGameFileList.Items.Clear();
+            foreach (MusicDescriptor musicDescriptor in musicDescriptorsDictionary[musicCategoryList.SelectedItem as string]) {
+                musicFileList.Items.Add(musicDescriptor);
+                if (musicCategoryList.SelectedItem != null) {
+                    currentCopyText = musicCategoryList.SelectedItem.ToString();
+                }
+            }
+            currentCopyText = musicCategoryList.SelectedItem.ToString();
+            copyBox.Text = currentCopyText;
+        }
+
+        private void musicFileList_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+        private void musicFileList_SelectedValueChanged(object sender, EventArgs e) {
+            musicDescriptionTextBox.Text = "";
+            if (musicFileList.SelectedItem != null) {
+                musicDescriptionText = (musicFileList.SelectedItem as MusicDescriptor).Descriptor;
+                musicDescriptionTextBox.Text = musicDescriptionText;
+            }
+            currentPathText = "";
+            fullPathText.Text = currentPathText;
+            musicGameFileList.Items.Clear();
+            files = new List<string>();
+            files.AddRange(Directory.EnumerateFiles(Path.Combine(baseGame, @"content\Sound\Resource\Stream")));
+            files.AddRange(Directory.EnumerateFiles(Path.Combine(update, @"content\Sound\Resource\Stream")));
+            if (musicFileList.SelectedItem != null) {
+                currentCopyText = musicFileList.SelectedItem.ToString();
+            }
+            copyBox.Text = currentCopyText;
+            //files.AddRange(Directory.EnumerateFiles(Path.Combine(dlc, @"content\Model")));
+            if (musicFileList.SelectedItem != null) {
+                currentMusicFiles = files.Select(x => new FileInfo(x))
+                                           .Where(x => x.Name.Contains((musicFileList.SelectedItem as MusicDescriptor).Filename))
+                                           .ToArray();
+                foreach (var file in currentMusicFiles) {
+                    musicGameFileList.Items.Add(file.Name);
+                }
+            }
+        }
+
+        private void musicGameFileList_SelectedValueChanged(object sender, EventArgs e) {
+            if (musicGameFileList.SelectedItem != null) {
+                currentCopyText = musicGameFileList.SelectedItem.ToString();
+                currentPathText = currentMusicFiles[musicGameFileList.SelectedIndex].FullName;
+            }
+            fullPathText.Text = currentPathText;
+            copyBox.Text = currentCopyText;
+        }
+
+        private void musicDescriptionTextBox_TextChanged(object sender, EventArgs e) {
+            musicDescriptionTextBox.Text = musicDescriptionText;
+        }
+
+        private void musicGameFileList_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+        private void musicGameFileList_MouseDoubleClick(object sender, MouseEventArgs e) {
+            if (musicGameFileList.SelectedItem != null) {
+                Process.Start(currentMusicFiles[musicGameFileList.SelectedIndex].FullName);
+            }
+        }
+
+        private void advancedView_MouseDoubleClick(object sender, MouseEventArgs e) {
+            if (!string.IsNullOrEmpty(currentPathText)) {
+                Process.Start(currentPathText);
             }
         }
     }
